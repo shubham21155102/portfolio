@@ -1,9 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import Header from "./Header";
 export default function Page(): JSX.Element {
   return (
     <>
-     
+     <Header/>
       <div className="flex flex-row justify-center items-center my-60">
         <div className="flex flex-col justify-center items-center">
           <Image
