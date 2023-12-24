@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import getBlogsMetadata from '../../lib/mdx'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import Header from '../Header'
 type Props = {}
 
 const Blog = (props: Props) => {
@@ -19,8 +20,10 @@ const Blog = (props: Props) => {
   }, []);
   return (
     <>
+      <div className='bg-black'>
+        <Header /></div>
       <div id="embedContainer">
-        <embed src='https://learn.shubhamiitbhu.in/' width='100%' height='100%' />
+        <embed src='https://learn.shubhamiitbhu.in/' width='100%' height='100%' style={{backgroundColor:"wheat"}}/>
       </div>
       {/* <h1>Blog</h1> */}
       {/* <ul>
