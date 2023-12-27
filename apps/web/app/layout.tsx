@@ -18,7 +18,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
+      <meta name="google-site-verification" content="H2ePTlxN6KnnjSd78F78hD3YrNnbwN99b7hVqXIzUM0"/>
       <body className={inter.className}>{children}</body>
+
     </html>
   );
 }
