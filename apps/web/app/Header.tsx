@@ -42,10 +42,13 @@ const Header = (props: Props) => {
                 }}
               />
             ) : (
-              <> <div className="flex flex-col text-2xl text-gray-300">
+              <> 
+              <center>
+              <div className="flex flex-col text-2xl text-gray-300">
                 <ul className="flex flex-col text-2xl text-gray-300">
                   <li className="mx-10 my-4" onClick={() => {
                     setPhoneShow(!phoneShow);
+                    sessionStorage.setItem('phoneShow', 'false');
                   }}><CancelIcon /></li>
                   <li className="mx-10 my-4"><Link href="/">Home</Link></li>
                   <li className="mx-10 my-4"><Link href="/about">About</Link></li>
@@ -55,7 +58,9 @@ const Header = (props: Props) => {
                   <li className="mx-10 my-4"><Link href="/resume">Resume</Link></li>
 
                 </ul>
-              </div></>
+              </div>
+              </center>
+              </>
             )}
           </div>
         </div>
