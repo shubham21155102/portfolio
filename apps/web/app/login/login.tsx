@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "../Header";
@@ -12,15 +12,15 @@ const LoginGlassmorphism: React.FC = () => {
 
   const logInSubmit = async (e: any) => {
     e.preventDefault();
-    const data = await fetch("http://localhost:8000/login", {
+    const data = await fetch("https://api.shubhamiitbhu.in/user/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         user_name: userName,
-        password: password
-      })
+        password: password,
+      }),
     });
     const response = await data.json();
     console.log(response);
@@ -28,7 +28,7 @@ const LoginGlassmorphism: React.FC = () => {
       console.log("success");
       setUserId(response.data.id);
       setLoggedIn("true");
-      router.push("/chat"); 
+      router.push("/progress");
     }
   };
 
@@ -39,21 +39,17 @@ const LoginGlassmorphism: React.FC = () => {
   }, [userId, userName]);
 
   return (
-
- 
     <div>
-      {loggedIn==="true" ? (
+      {loggedIn === "true" ? (
         <></>
       ) : (
         <>
-      
           <div>
-          
             <section>
               <div className="color"></div>
               <div className="color"></div>
               <div className="color"></div>
-             
+
               <div className="box">
                 <div className="container">
                   <div className="form">
@@ -79,8 +75,7 @@ const LoginGlassmorphism: React.FC = () => {
                         <input type="submit" value="Log In" />
                       </div>
                       <p className="forget">
-                        Don't have an account ?{" "}
-                        <a href="/register">Sign up</a>
+                        Don't have an account ? <a href="/register">Sign up</a>
                       </p>
                     </form>
                   </div>

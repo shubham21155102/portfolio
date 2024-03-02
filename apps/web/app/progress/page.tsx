@@ -3,10 +3,11 @@ import dsaData from "./dsa.json";
 import Header from "../Header";
 import Footer from "../Footer";
 import Link from "next/link";
+import ProgressHeader from "../ProgressHeader";
 const Page = () => {
   return (
     <div className="flex flex-col h-screen">
-      <Header />
+      <ProgressHeader />
       <div className="flex-grow px-4 py-8">
         {dsaData.data.map((item, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md p-4 mb-4">
