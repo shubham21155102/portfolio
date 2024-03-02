@@ -20,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <meta name="google-site-verification" content="H2ePTlxN6KnnjSd78F78hD3YrNnbwN99b7hVqXIzUM0" />
       <meta name="google-adsense-account" content="ca-pub-6714499173199533" />
+      
       <body className={inter.className}>{children}</body>
+      
     </html>
   );
 }

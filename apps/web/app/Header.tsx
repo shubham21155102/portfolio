@@ -50,8 +50,8 @@ const Header = (props: Props) => {
                     setPhoneShow(!phoneShow);
                     sessionStorage.setItem('phoneShow', 'false');
                   }}><CancelIcon /></li>
-                  <li className="mx-10 my-4"><Link href="/">Home</Link></li>
-                  <li className="mx-10 my-4"><Link href="/about">About</Link></li>
+                  {/* <li className="mx-10 my-4"><Link href="/">Home</Link></li>
+                  <li className="mx-10 my-4"><Link href="/about">About</Link></li> */}
                   <li className="mx-10 my-4"><Link href="/blog">Blog</Link></li>
                   <li className="mx-10 my-4"><Link href="/contact">Contact</Link></li>
                   <li className="mx-10 my-4"><Link href="/work">Works</Link></li>
@@ -68,8 +68,8 @@ const Header = (props: Props) => {
 
       </>) : (<div>
         <ul className="flex flex-column text-2xl float-end my-8 px-16 text-gray-300">
-          <li className="mx-10"><Link href="/">Home</Link></li>
-          <li className="mx-10"><Link href="/about">About</Link></li>
+          {/* <li className="mx-10"><Link href="/">Home</Link></li>
+          <li className="mx-10"><Link href="/about">About</Link></li> */}
           <li className="mx-10"><Link href="/blog">Blog</Link></li>
           <li className="mx-10"><Link href="/contact">Contact</Link></li>
           <li className="mx-10"><Link href="/work">Works</Link></li>

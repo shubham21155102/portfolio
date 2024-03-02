@@ -15,7 +15,7 @@ export default function Page(): JSX.Element {
             className="rounded-full"
           />
           <div className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Shubham Patel</div>
-          <div className="text-2xl font-bold tracking-tight text-white sm:text-3xl">Software Developer Enthusiast</div>
+          <div className="text-2xl font-bold tracking-tight text-white sm:text-3xl">Software Development Enthusiast</div>
         </div>
       </div>
     </>
