@@ -29,8 +29,9 @@ const IndividualTopics = (props: any) => {
             <p className="mt-2 text-gray-900 mr-2 px-10">{topic.title}</p>
           </td>
           <td className="p-4">
-            <Link href={`${topic.yt_link}`} passHref>
+            <Link href={`${topic.yt_link}`} passHref target="__blank">
               <Image 
+                
                 src={"/youtube.svg"}
                 alt="YouTube Link"
                 width={35}
