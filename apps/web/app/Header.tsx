@@ -62,7 +62,7 @@ const Header = (props: Props) => {
                           <Link href="/blog">Blog</Link>
                         </li>
                         <li className="mx-10 my-4">
-                          <Link href="/progress">Progress</Link>
+                          <Link href="/progress">DSA</Link>
                         </li>
 
                         <li className="mx-10 my-4">
@@ -91,7 +91,7 @@ const Header = (props: Props) => {
               <Link href="/blog">Blog</Link>
             </li>
             <li className="mx-10">
-              <Link href="/progress">Progress</Link>
+              <Link href="/progress">DSA</Link>
             </li>
             <li className="mx-10">
               <Link href="/contact">Contact</Link>
