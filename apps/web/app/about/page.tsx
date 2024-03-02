@@ -1,13 +1,11 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
-export const metadata={
-  title:'About'
-}
+type Props = {};
+export const metadata = {
+  title: "About",
+};
 const About = (props: Props) => {
-  return (
-    <div>About</div>
-  )
-}
+  return <div>About</div>;
+};
 
-export default About
+export default About;

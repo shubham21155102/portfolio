@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import Link from 'next/link';
-import MenuIcon from '@mui/icons-material/Menu';
-import CancelIcon from '@mui/icons-material/Cancel';
-import Image from 'next/image';
+import React, { useState, useEffect } from "react";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import Link from "next/link";
+import MenuIcon from "@mui/icons-material/Menu";
+import CancelIcon from "@mui/icons-material/Cancel";
+import Image from "next/image";
 type Props = {};
 
 const Header = (props: Props) => {
@@ -23,59 +23,88 @@ const Header = (props: Props) => {
 
   useEffect(() => {
     showButton();
-    window.addEventListener('resize', showButton);
+    window.addEventListener("resize", showButton);
 
     return () => {
-      window.removeEventListener('resize', showButton);
+      window.removeEventListener("resize", showButton);
     };
   }, []);
 
   return (
     <>
-      {button ? (<>
-        <div className="flex justify-between items-center py-4 px-8">
-          <div className="text-2xl text-gray-300">
-            {!phoneShow ? (
-              <MenuIcon
-                onClick={() => {
-                  setPhoneShow(!phoneShow);
-                }}
-              />
-            ) : (
-              <> 
-              <center>
-              <div className="flex flex-col text-2xl text-gray-300">
-                <ul className="flex flex-col text-2xl text-gray-300">
-                  <li className="mx-10 my-4" onClick={() => {
+      {button ? (
+        <>
+          <div className="flex justify-between items-center py-4 px-8">
+            <div className="text-2xl text-gray-300">
+              {!phoneShow ? (
+                <MenuIcon
+                  onClick={() => {
                     setPhoneShow(!phoneShow);
-                    sessionStorage.setItem('phoneShow', 'false');
-                  }}><CancelIcon /></li>
-                  {/* <li className="mx-10 my-4"><Link href="/">Home</Link></li>
+                  }}
+                />
+              ) : (
+                <>
+                  <center>
+                    <div className="flex flex-col text-2xl text-gray-300">
+                      <ul className="flex flex-col text-2xl text-gray-300">
+                        <li
+                          className="mx-10 my-4"
+                          onClick={() => {
+                            setPhoneShow(!phoneShow);
+                            sessionStorage.setItem("phoneShow", "false");
+                          }}
+                        >
+                          <CancelIcon />
+                        </li>
+                        {/* <li className="mx-10 my-4"><Link href="/">Home</Link></li>
                   <li className="mx-10 my-4"><Link href="/about">About</Link></li> */}
-                  <li className="mx-10 my-4"><Link href="/blog">Blog</Link></li>
-                  <li className="mx-10 my-4"><Link href="/contact">Contact</Link></li>
-                  <li className="mx-10 my-4"><Link href="/work">Works</Link></li>
-                  <li className="mx-10 my-4"><Link href="/resume">Resume</Link></li>
+                        <li className="mx-10 my-4">
+                          <Link href="/blog">Blog</Link>
+                        </li>
+                        <li className="mx-10 my-4">
+                          <Link href="/progress">Progress</Link>
+                        </li>
 
-                </ul>
-              </div>
-              </center>
-              </>
-            )}
+                        <li className="mx-10 my-4">
+                          <Link href="/contact">Contact</Link>
+                        </li>
+                        <li className="mx-10 my-4">
+                          <Link href="/work">Works</Link>
+                        </li>
+                        <li className="mx-10 my-4">
+                          <Link href="/resume">Resume</Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </center>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-
-
-      </>) : (<div>
-        <ul className="flex flex-column text-2xl float-end my-8 px-16 text-gray-300">
-          {/* <li className="mx-10"><Link href="/">Home</Link></li>
+        </>
+      ) : (
+        <div>
+          <ul className="flex flex-column text-2xl float-end my-8 px-16 text-gray-300">
+            {/* <li className="mx-10"><Link href="/">Home</Link></li>
           <li className="mx-10"><Link href="/about">About</Link></li> */}
-          <li className="mx-10"><Link href="/blog">Blog</Link></li>
-          <li className="mx-10"><Link href="/contact">Contact</Link></li>
-          <li className="mx-10"><Link href="/work">Works</Link></li>
-          <li className="mx-10"><Link href="/resume">Resume</Link></li>
-        </ul>
-      </div>)}
+            <li className="mx-10">
+              <Link href="/blog">Blog</Link>
+            </li>
+            <li className="mx-10">
+              <Link href="/progress">Progress</Link>
+            </li>
+            <li className="mx-10">
+              <Link href="/contact">Contact</Link>
+            </li>
+            <li className="mx-10">
+              <Link href="/work">Works</Link>
+            </li>
+            <li className="mx-10">
+              <Link href="/resume">Resume</Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };
