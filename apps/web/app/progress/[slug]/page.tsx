@@ -215,7 +215,7 @@ const IndividualTopics = (props: any) => {
                           )}
                         </td>
                         <td>
-                          {userId === "d592f4cd-8f4d-4af0-9d80-723827eeb65f" ? (
+                          {/* {userId === "d592f4cd-8f4d-4af0-9d80-723827eeb65f" ? ( */}
                             <Link
                               href={`/progress/${slug}/${topic.id}`}
                               className="bg-gray"
@@ -228,7 +228,7 @@ const IndividualTopics = (props: any) => {
                                 Submit Code
                               </Button>
                             </Link>
-                          ) : null}
+                          {/* ) : null} */}
                         </td>
                       </tr>
                     ))}
