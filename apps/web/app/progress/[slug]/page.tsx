@@ -118,57 +118,101 @@ const IndividualTopics = (props: any) => {
               <h2 className="text-lg font-bold text-black">{item.sl_no}</h2>
               <p className="mt-2 text-gray-800">{item.title}</p>
               <div className="mt-4">
-              <table className="w-full">
-             
-  <tbody>
- 
-    {item.topics.map((topic, index) => (
-      <tr key={index} className={`rounded-lg shadow-md p-4 mb-8 ${isProblemSolved(topic.id) ? SOLVED_CLASS : UNSOLVED_CLASS}`}>
-         <td className="p-4 " style={{width:"5%"}}>
-          <p className="text-lg font-bold text-black mr-2" >{topic.sl_no_a2z}</p>
-        </td>
-        <td className="p-4" style={{width:"50%"}}>
-          <p className="mt-2 text-gray-900 mr-2 px-10" >{topic.title}</p>
-        </td>
-        <td className="p-4" style={{width:"10%"}}>
-          <Link href={`${topic.yt_link}`} passHref target="__blank">
-            <Image src={"/youtube.svg"} alt="YouTube Link" width={35} height={35} className="rounded-full" />
-          </Link>
-        </td>
-        <td className="p-4" style={{width:"10%"}}>
-          {topic.p1_link && (
-            <Link href={`${topic.p1_link}`} target="__blank">
-              <Image src={"/cn.svg"} alt="Link 1" width={100} height={100} className="rounded-full" />
-            </Link>
-          )}
-        </td>
-        <td className="p-4" style={{width:"10%"}}>
-          {topic.p2_link && (
-            <Link href={`${topic.p2_link}`} target="__blank">
-              <Image src={"/leetcode.png"} alt="Link 2" width={25} height={25} className="rounded-full" />
-            </Link>
-          )}
-        </td>
-        <td style={{width:"25%"}}>
-          {loggedIn && (
-            <>
-              {isProblemSolved(topic.id) ? (
-                <Button variant="contained" color="primary" className="p-2" onClick={() => problemUnsolved(userId, topic.id)}>
-                  Mark as Unsolved
-                </Button>
-              ) : (
-                <Button variant="contained" color="primary" className="p-2" onClick={() => problemSolved(userId, topic.id)}>
-                  Mark as Solved
-                </Button>
-              )}
-            </>
-          )}
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
+                <table className="w-full">
+                  <tbody>
+                    {item.topics.map((topic, index) => (
+                      <tr
+                        key={index}
+                        className={`rounded-lg shadow-md p-4 mb-8 ${
+                          isProblemSolved(topic.id)
+                            ? SOLVED_CLASS
+                            : UNSOLVED_CLASS
+                        }`}
+                      >
+                        <td className="p-4 " style={{ width: "5%" }}>
+                          <p className="text-lg font-bold text-black mr-2">
+                            {topic.sl_no_a2z}
+                          </p>
+                        </td>
+                        <td className="p-4" style={{ width: "50%" }}>
+                          <p className="mt-2 text-gray-900 mr-2 px-10">
+                            {topic.title}
+                          </p>
+                        </td>
+                        <td className="p-4" style={{ width: "10%" }}>
+                          <Link
+                            href={`${topic.yt_link}`}
+                            passHref
+                            target="__blank"
+                          >
+                            <Image
+                              src={"/youtube.svg"}
+                              alt="YouTube Link"
+                              width={35}
+                              height={35}
+                              className="rounded-full"
+                            />
+                          </Link>
+                        </td>
+                        <td className="p-4" style={{ width: "10%" }}>
+                          {topic.p1_link && (
+                            <Link href={`${topic.p1_link}`} target="__blank">
+                              <Image
+                                src={"/cn.svg"}
+                                alt="Link 1"
+                                width={100}
+                                height={100}
+                                className="rounded-full"
+                              />
+                            </Link>
+                          )}
+                        </td>
+                        <td className="p-4" style={{ width: "10%" }}>
+                          {topic.p2_link && (
+                            <Link href={`${topic.p2_link}`} target="__blank">
+                              <Image
+                                src={"/leetcode.png"}
+                                alt="Link 2"
+                                width={25}
+                                height={25}
+                                className="rounded-full"
+                              />
+                            </Link>
+                          )}
+                        </td>
+                        <td style={{ width: "25%" }}>
+                          {loggedIn && (
+                            <>
+                              {isProblemSolved(topic.id) ? (
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  className="p-2"
+                                  onClick={() =>
+                                    problemUnsolved(userId, topic.id)
+                                  }
+                                >
+                                  Mark as Unsolved
+                                </Button>
+                              ) : (
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  className="p-2"
+                                  onClick={() =>
+                                    problemSolved(userId, topic.id)
+                                  }
+                                >
+                                  Mark as Solved
+                                </Button>
+                              )}
+                            </>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           ))}
