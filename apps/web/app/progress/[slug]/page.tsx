@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import dsaData from "../dsa.json";
 import Link from "next/link";
-import Header from "../../Header";
 import Footer from "../../Footer";
 import Image from "next/image";
 import ProgressHeader from "../../ProgressHeader";
