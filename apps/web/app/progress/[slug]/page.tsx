@@ -11,6 +11,7 @@ const UNSOLVED_CLASS = "bg-red-100";
 const IndividualTopics = (props: any) => {
   const [userId, setUserId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
   const [solvedQuestions, setSolvedQuestions] = useState<string[]>([]);
   const [reload, setReload] = useState(false);
   const slug = props.params.slug;
@@ -53,7 +54,12 @@ const IndividualTopics = (props: any) => {
     }
   }, [userId, reload]);
   function isProblemSolved(problemId: string) {
-    return solvedQuestions.includes(problemId);
+    try {
+      const q = solvedQuestions.includes(problemId);
+      return q;
+    } catch (e) {
+      return false;
+    }
   }
   async function problemSolved(userId: string, problemId: string) {
     try {
@@ -207,6 +213,22 @@ const IndividualTopics = (props: any) => {
                               )}
                             </>
                           )}
+                        </td>
+                        <td>
+                          {userId === "d592f4cd-8f4d-4af0-9d80-723827eeb65f" ? (
+                            <Link
+                              href={`/progress/${slug}/${topic.id}`}
+                              className="bg-gray"
+                            >
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                className="p-2"
+                              >
+                                Submit Code
+                              </Button>
+                            </Link>
+                          ) : null}
                         </td>
                       </tr>
                     ))}
