@@ -1,5 +1,4 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import Header from "../Header";
 import Link from "next/link";
 
@@ -56,6 +55,5 @@ const Projects = () => {
   );
 };
 
-const ProjectCSR = dynamic(() => Promise.resolve(Projects), { ssr: false });
 
 export default Projects;

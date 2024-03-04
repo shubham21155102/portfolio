@@ -1,12 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Classes from "./page.module.css";
-type Props = {};
 export const metadata = {
   title: "Contact",
 };
 
-const Contact = (props: Props) => {
+const Contact = () => {
   return (
     <>
       <div className={Classes.container}>

@@ -1,10 +1,9 @@
 import React from "react";
 
-type Props = {};
 export const metadata = {
   title: "About",
 };
-const About = (props: Props) => {
+const About = () => {
   return <div>About</div>;
 };
 

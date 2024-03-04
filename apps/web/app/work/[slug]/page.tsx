@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-type Props = {};
 const webSites = [
   {
     title: "E-Commerce Full Stack WebApp Next JS and Spring Boot",

@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-const page = (props: Props) => {
+const page = () => {
   return (
     <>
       {/* https://drive.google.com/file/d/1G7-YYaaL278Yz1nv5Jjo5fUtDDY5DGg1/preview

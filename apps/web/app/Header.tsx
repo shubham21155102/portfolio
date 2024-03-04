@@ -1,14 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
-import Image from "next/image";
-type Props = {};
 
-const Header = (props: Props) => {
+const Header = () => {
   const [button, setButton] = useState(true);
   const [phoneShow, setPhoneShow] = useState(false);
 

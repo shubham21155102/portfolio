@@ -1,6 +1,5 @@
 import React from "react";
 import dsaData from "./dsa.json";
-import Header from "../Header";
 import Footer from "../Footer";
 import Link from "next/link";
 import ProgressHeader from "../ProgressHeader";
