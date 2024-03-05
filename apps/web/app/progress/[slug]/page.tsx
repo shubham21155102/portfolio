@@ -216,7 +216,8 @@ const IndividualTopics = (props: any) => {
                                         visible={true}
                                         height="40"
                                         width="120"
-                                        color="#4fa94d"
+                                        barColor="#4fa94d"
+                                        // color="#4fa94d"
                                         ariaLabel="progress-bar-loading"
                                         wrapperStyle={{}}
                                         wrapperClass=""
@@ -242,7 +243,9 @@ const IndividualTopics = (props: any) => {
                                         visible={true}
                                         height="40"
                                         width="40"
-                                        color="#4fa94d"
+                                        barColor="#4fa94d"
+
+                                        // color="#4fa94d"
                                         ariaLabel="progress-bar-loading"
                                         wrapperStyle={{}}
                                         wrapperClass=""
