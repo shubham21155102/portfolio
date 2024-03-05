@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { ProgressBar } from "react-loader-spinner";
 import dsaData from "../dsa.json";
 import Link from "next/link";
 import Footer from "../../Footer";
@@ -12,6 +13,8 @@ const IndividualTopics = (props: any) => {
   const [userId, setUserId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const [solvedButtonClicked, setSolvedButtonClicked] = useState(false);
+  const [loadingStates, setLoadingStates] = useState<{ [key: string]: boolean }>({});
   const [solvedQuestions, setSolvedQuestions] = useState<string[]>([]);
   const [reload, setReload] = useState(false);
   const slug = props.params.slug;
@@ -63,6 +66,8 @@ const IndividualTopics = (props: any) => {
   }
   async function problemSolved(userId: string, problemId: string) {
     try {
+      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: true }));
+      setSolvedButtonClicked(true);
       const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "POST",
         headers: {
@@ -77,12 +82,16 @@ const IndividualTopics = (props: any) => {
       setReload(!reload);
       const data = await response.json();
       console.log(data);
+      setSolvedButtonClicked(false);
+      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: false }));
     } catch (e) {
       console.log(e);
     }
   }
   async function problemUnsolved(userId: string, problemId: string) {
     try {
+      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: true }));
+      setSolvedButtonClicked(true);
       const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "DELETE",
         headers: {
@@ -97,10 +106,13 @@ const IndividualTopics = (props: any) => {
       const data = await response.json();
       setReload(!reload);
       console.log(data);
+      setSolvedButtonClicked(false);
+      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: false }));
     } catch (e) {
       console.log(e);
     }
   }
+  useEffect(() => {}, [solvedButtonClicked]);
   return (
     <>
       <div className="flex flex-col h-screen">
@@ -196,8 +208,23 @@ const IndividualTopics = (props: any) => {
                                   onClick={() =>
                                     problemUnsolved(userId, topic.id)
                                   }
+                                  disabled={loadingStates[topic.id]}
                                 >
-                                  Mark as Unsolved
+                                  {loadingStates[topic.id] ? (
+                                    <>
+                                      <ProgressBar
+                                        visible={true}
+                                        height="40"
+                                        width="120"
+                                        color="#4fa94d"
+                                        ariaLabel="progress-bar-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClass=""
+                                      />
+                                    </>
+                                  ) : (
+                                    <>Mark as Unsolved</>
+                                  )}
                                 </Button>
                               ) : (
                                 <Button
@@ -207,8 +234,23 @@ const IndividualTopics = (props: any) => {
                                   onClick={() =>
                                     problemSolved(userId, topic.id)
                                   }
+                                  disabled={loadingStates[topic.id]}
                                 >
-                                  Mark as Solved
+                                  {loadingStates[topic.id] ? (
+                                    <>
+                                      <ProgressBar
+                                        visible={true}
+                                        height="40"
+                                        width="40"
+                                        color="#4fa94d"
+                                        ariaLabel="progress-bar-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClass=""
+                                      />
+                                    </>
+                                  ) : (
+                                    <>Mark as Solved</>
+                                  )}
                                 </Button>
                               )}
                             </>
@@ -216,19 +258,18 @@ const IndividualTopics = (props: any) => {
                         </td>
                         <td>
                           {/* {userId === "d592f4cd-8f4d-4af0-9d80-723827eeb65f" ? ( */}
-                            <Link
-                              href={`/progress/${slug}/${topic.id}`}
-                              className="bg-gray"
+                          <Link
+                            href={`/progress/${slug}/${topic.id}`}
+                            className="bg-gray"
+                          >
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              className="p-2"
                             >
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                className="p-2"
-                              >
-                                Submit Code
-                              </Button>
-                            </Link>
-                          {/* ) : null} */}
+                              Submit Code
+                            </Button>
+                          </Link>
                         </td>
                       </tr>
                     ))}

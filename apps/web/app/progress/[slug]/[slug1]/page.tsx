@@ -16,14 +16,14 @@ const page = (props: any) => {
   });
   return (
     <>
-          <div style={{ width: "100%", height: "100vh", overflow: "hidden" }}>
-            <embed
-              src={`https://compiler.shubhamiitbhu.in/editor/${userName}/${slug}`}
-              width="100%"
-              height="100%"
-              style={{ backgroundColor: "wheat" }}
-            />
-          </div>
+      <div style={{ width: "100%", height: "100vh", overflow: "hidden" }}>
+        <embed
+          src={`https://compiler.shubhamiitbhu.in/editor/${userName}/${slug}`}
+          width="100%"
+          height="100%"
+          style={{ backgroundColor: "wheat" }}
+        />
+      </div>
     </>
   );
 };
