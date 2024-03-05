@@ -264,6 +264,7 @@ const IndividualTopics = (props: any) => {
                           <Link
                             href={`/progress/${slug}/${topic.id}`}
                             className="bg-gray"
+                            target="__blank"
                           >
                             <Button
                               variant="contained"
