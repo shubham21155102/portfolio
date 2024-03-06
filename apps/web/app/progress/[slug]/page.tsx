@@ -14,7 +14,9 @@ const IndividualTopics = (props: any) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [solvedButtonClicked, setSolvedButtonClicked] = useState(false);
-  const [loadingStates, setLoadingStates] = useState<{ [key: string]: boolean }>({});
+  const [loadingStates, setLoadingStates] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [solvedQuestions, setSolvedQuestions] = useState<string[]>([]);
   const [reload, setReload] = useState(false);
   const slug = props.params.slug;
@@ -66,7 +68,10 @@ const IndividualTopics = (props: any) => {
   }
   async function problemSolved(userId: string, problemId: string) {
     try {
-      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: true }));
+      setLoadingStates((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [problemId]: true,
+      }));
       setSolvedButtonClicked(true);
       const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "POST",
@@ -83,14 +88,20 @@ const IndividualTopics = (props: any) => {
       const data = await response.json();
       console.log(data);
       setSolvedButtonClicked(false);
-      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: false }));
+      setLoadingStates((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [problemId]: false,
+      }));
     } catch (e) {
       console.log(e);
     }
   }
   async function problemUnsolved(userId: string, problemId: string) {
     try {
-      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: true }));
+      setLoadingStates((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [problemId]: true,
+      }));
       setSolvedButtonClicked(true);
       const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "DELETE",
@@ -107,7 +118,10 @@ const IndividualTopics = (props: any) => {
       setReload(!reload);
       console.log(data);
       setSolvedButtonClicked(false);
-      setLoadingStates(prevLoadingStates => ({ ...prevLoadingStates, [problemId]: false }));
+      setLoadingStates((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [problemId]: false,
+      }));
     } catch (e) {
       console.log(e);
     }
@@ -244,7 +258,6 @@ const IndividualTopics = (props: any) => {
                                         height="40"
                                         width="40"
                                         barColor="#4fa94d"
-
                                         // color="#4fa94d"
                                         ariaLabel="progress-bar-loading"
                                         wrapperStyle={{}}
