@@ -12,7 +12,15 @@
         ]
      },
      {
-
+        "id":"arrayshubhamiitbhu",
+        "title":"Array",
+        "questions":[
+            {
+                "id":"array-of-doubled-pairs",
+                "link":"https://leetcode.com/problems/array-of-doubled-pairs/",
+                "name":"Array of Doubled Pairs"
+            }
+        ]
      }
   ]
 }

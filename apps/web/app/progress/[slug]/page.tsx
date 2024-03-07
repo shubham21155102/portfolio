@@ -39,7 +39,6 @@ const IndividualTopics = (props: any) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              user_id: userId,
             },
             body: JSON.stringify({
               user_id: userId,
