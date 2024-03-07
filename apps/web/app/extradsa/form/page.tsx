@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 const Page = () => {
   const [tagId, setTagId] = useState("");
   const [tag, setTag] = useState("");
@@ -8,7 +7,6 @@ const Page = () => {
   const [questionLink, setQuestionLink] = useState("");
   const [questionName, setQuestionName] = useState("");
   const [allTags, setAllTags] = useState([]);
-
   useEffect(() => {
     const fetchTags = async () => {
       try {

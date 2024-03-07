@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useMemo ,memo} from "react";
 
 const Page = () => {
   const [questions, setQuestions] = useState([]);
@@ -40,11 +40,14 @@ const Page = () => {
     setQuestions(sortedQuestions);
   };
 
-  useEffect(() => {
-    const sortedQuestions = [...questions].sort((a: any, b: any) =>
-      a.tagtitle.localeCompare(b.tagtitle),
-    );
-    setQuestions(sortedQuestions);
+  // useEffect(() => {
+  //   const sortedQuestions = [...questions].sort((a: any, b: any) =>
+  //     a.tagtitle.localeCompare(b.tagtitle),
+  //   );
+  //   setQuestions(sortedQuestions);
+  // }, [questions]);
+  const sortedQuestions = useMemo(() => {
+    return [...questions].sort((a:any, b:any) => a.tagtitle.localeCompare(b.tagtitle));
   }, [questions]);
   return (
     <div className="flex flex-col h-screen">
@@ -67,7 +70,7 @@ const Page = () => {
             </tr>
           </thead>
           <tbody>
-            {questions.map((q: any, index) => (
+            {sortedQuestions.map((q: any, index:number) => (
               <tr
                 key={index}
                 className="text-lg font-normal border-b border-gray-300"
@@ -92,6 +95,32 @@ const Page = () => {
                 </td>
               </tr>
             ))}
+            {/* UseEffect*/ }
+              {/* {questions.map((q: any, index:number) => (
+              <tr
+                key={index}
+                className="text-lg font-normal border-b border-gray-300"
+              >
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  {index + 1}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  {q.questionname}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  {q.tagtitle}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  <Link
+                    href={q.questionlink}
+                    className="text-blue-500 hover:underline text-center"
+                    target="__blank"
+                  >
+                    Click
+                  </Link>
+                </td>
+              </tr>
+            ))} */}
           </tbody>
         </table>
       </div>
@@ -99,4 +128,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default memo(Page);
