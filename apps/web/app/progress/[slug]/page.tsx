@@ -34,7 +34,7 @@ const IndividualTopics = (props: any) => {
     const fetchSolvedQuestions = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/questions/questions`,
+          `https://api.shubhamiitbhu.in/questions/questions`,
           {
             method: "POST",
             headers: {
@@ -72,7 +72,7 @@ const IndividualTopics = (props: any) => {
         [problemId]: true,
       }));
       setSolvedButtonClicked(true);
-      const response = await fetch("http://localhost:8000/questions", {
+      const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -101,7 +101,7 @@ const IndividualTopics = (props: any) => {
         [problemId]: true,
       }));
       setSolvedButtonClicked(true);
-      const response = await fetch("http://localhost:8000/questions", {
+      const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
