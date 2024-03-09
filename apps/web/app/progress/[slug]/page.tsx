@@ -31,30 +31,40 @@ const IndividualTopics = (props: any) => {
   }, []);
 
   useEffect(() => {
-    const fetchSolvedQuestions = async () => {
-      try {
-        const response = await fetch(
-          `https://api.shubhamiitbhu.in/questions/questions`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+    let solvedQuestionsFromLocalStorage =
+      localStorage.getItem("solvedQuestions");
+    if (!solvedQuestionsFromLocalStorage) {
+      const fetchSolvedQuestions = async () => {
+        try {
+          const response = await fetch(
+            `https://api.shubhamiitbhu.in/questions/questions`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userId: userId,
+              }),
             },
-            body: JSON.stringify({
-              userId: userId,
-            }),
-          },
-        );
-        const data = await response.json();
-        setSolvedQuestions(data.data);
-        console.log(data.data);
-      } catch (error) {
-        console.error("Error fetching solved questions:", error);
-      }
-    };
+          );
+          const data = await response.json();
+          setSolvedQuestions(data.data);
+          await localStorage.setItem(
+            "solvedQuestions",
+            JSON.stringify(data.data),
+          );
+          console.log(data.data);
+        } catch (error) {
+          console.error("Error fetching solved questions:", error);
+        }
+      };
 
-    if (userId) {
-      fetchSolvedQuestions();
+      if (userId) {
+        fetchSolvedQuestions();
+      }
+    } else {
+      setSolvedQuestions(JSON.parse(solvedQuestionsFromLocalStorage));
     }
   }, [userId, reload]);
   function isProblemSolved(problemId: string) {
@@ -66,6 +76,7 @@ const IndividualTopics = (props: any) => {
     }
   }
   async function problemSolved(userId: string, problemId: string) {
+    await localStorage.removeItem("solvedQuestions");
     try {
       setLoadingStates((prevLoadingStates) => ({
         ...prevLoadingStates,
@@ -75,7 +86,7 @@ const IndividualTopics = (props: any) => {
       const response = await fetch("https://api.shubhamiitbhu.in/questions", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userid: userId,
@@ -95,6 +106,7 @@ const IndividualTopics = (props: any) => {
     }
   }
   async function problemUnsolved(userId: string, problemId: string) {
+    await localStorage.removeItem("solvedQuestions");
     try {
       setLoadingStates((prevLoadingStates) => ({
         ...prevLoadingStates,

@@ -9,6 +9,30 @@ const Page = () => {
   const [allTags, setAllTags] = useState([]);
   useEffect(() => {
     const fetchTags = async () => {
+      if (!("indexedDB" in window)) {
+        await localStorage.removeItem("extraDSAQuestions");
+      } else {
+        const dbName = "shubhamiitbhu";
+        const dbVersion = 1;
+        const dbRequest = indexedDB.open(dbName, dbVersion);
+
+        dbRequest.onerror = function (event: any) {
+          console.log("Database error: " + event.target.errorCode);
+        };
+        dbRequest.onsuccess = function (event: any) {
+          const db = dbRequest.result;
+          // console.log(db)
+          const request = db
+            .transaction("extraDSAQuestions", "readwrite")
+            .objectStore("extraDSAQuestions")
+            .clear();
+          request.onsuccess = function (event: any) {
+            console.log("ObjectStore cleared");
+          };
+          console.log("Database opened successfully.");
+          // Handle other operations as needed
+        };
+      }
       try {
         const response = await fetch(
           "https://api.shubhamiitbhu.in/questions/questiontags",
@@ -17,7 +41,7 @@ const Page = () => {
             headers: {
               "Content-Type": "application/json",
             },
-          }
+          },
         );
         const data = await response.json();
         setAllTags(data.data);
@@ -28,9 +52,9 @@ const Page = () => {
     };
 
     fetchTags();
-  }, []); 
+  }, []);
 
-  const onSubmit = async (e:any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     // console.log(tagId, tag, questionId, questionLink, questionName);
     const response = await fetch(
@@ -41,13 +65,13 @@ const Page = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          tagid:tagId,
-          tagtitle:tag,
-          questionid:questionId,
-          questionlink:questionLink,
-          questionname:questionName,
+          tagid: tagId,
+          tagtitle: tag,
+          questionid: questionId,
+          questionlink: questionLink,
+          questionname: questionName,
         }),
-      }
+      },
     );
     const data = await response.json();
     console.log(data);
@@ -70,10 +94,10 @@ const Page = () => {
                       value={tagId}
                       onChange={(e) => setTagId(e.target.value)}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      style={{backgroundColor:"#ff6b35"}}
+                      style={{ backgroundColor: "#ff6b35" }}
                     >
                       <option value="">Select Tag</option>
-                      {allTags.map((tag:any) => (
+                      {allTags.map((tag: any) => (
                         <option key={tag.tag} value={tag.tag}>
                           {tag.tagname}
                         </option>
@@ -113,7 +137,6 @@ const Page = () => {
                   <div className="inputBox">
                     <input type="submit" value="Submit" />
                   </div>
-      
                 </form>
               </div>
             </div>
