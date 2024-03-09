@@ -6,6 +6,7 @@ const page = () => {
   const router = useRouter();
   useEffect(() => {
     localStorage.clear();
+    indexedDB.deleteDatabase("shubhamiitbhu");
     router.push("/login");
   });
   return <></>;
