@@ -107,7 +107,7 @@ const Page = () => {
                   <td className="px-4 py-2">{question.title}</td>
                  
                   <td className="px-4 py-2">
-                    <Link href={`https://www.lintcode.com/problem/${question.problem_id}/`} passHref className="text-blue-600 underline">
+                    <Link href={`https://www.lintcode.com/problem/${question.problem_id}/`} passHref className="text-blue-600 underline" target='__blank'>
                       
                         Solve
                     </Link>
