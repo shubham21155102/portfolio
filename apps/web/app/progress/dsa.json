@@ -5106,7 +5106,7 @@
                         {
                             "id": "cycldtctininnirctdgrphbfs",
                             "tags": "",
-                            "title": "Cycle Detection in unirected Graph (bfs)",
+                            "title": "Cycle Detection in undirected Graph (bfs)",
                             "step_no": 15,
                             "yt_link": "https://youtu.be/BPlrALf1LDU",
                             "post_link": "https://takeuforward.org/data-structure/detect-cycle-in-an-undirected-graph-using-bfs/",
