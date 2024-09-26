@@ -13,7 +13,6 @@ const Header = () => {
       setButton(false);
     } else {
       setButton(true);
-      // alert("hello");
     }
   };
 
@@ -37,65 +36,76 @@ const Header = () => {
                   onClick={() => {
                     setPhoneShow(!phoneShow);
                   }}
+                  className="cursor-pointer"
                 />
               ) : (
                 <>
-                  <center>
-                    <div className="flex flex-col text-2xl text-gray-300">
-                      <ul className="flex flex-col text-2xl text-gray-300">
-                        <li
-                          className="mx-10 my-4"
-                          onClick={() => {
-                            setPhoneShow(!phoneShow);
-                            sessionStorage.setItem("phoneShow", "false");
-                          }}
-                        >
-                          <CancelIcon />
-                        </li>
-                        {/* <li className="mx-10 my-4"><Link href="/">Home</Link></li>
-                  <li className="mx-10 my-4"><Link href="/about">About</Link></li> */}
-                        <li className="mx-10 my-4">
-                          <Link href="/blog">Blog</Link>
-                        </li>
-                        <li className="mx-10 my-4">
-                          <Link href="/progress">DSA</Link>
-                        </li>
-
-                        <li className="mx-10 my-4">
-                          <Link href="/contact">Contact</Link>
-                        </li>
-                        <li className="mx-10 my-4">
-                          <Link href="/work">Works</Link>
-                        </li>
-                        <li className="mx-10 my-4">
-                          <Link href="/resume">Resume</Link>
-                        </li>
-                      </ul>
+                  <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-90 z-50">
+                    <div
+                      className="mb-4 cursor-pointer"
+                      onClick={() => {
+                        setPhoneShow(false);
+                      }}
+                    >
+                      <CancelIcon fontSize="large" />
                     </div>
-                  </center>
+                    <ul className="flex flex-col items-center text-xl text-gray-300 space-y-4">
+                      <li
+                        className="cursor-pointer"
+                        onClick={() => setPhoneShow(false)}
+                      >
+                        <Link href="/blog">Blog</Link>
+                      </li>
+                      <li
+                        className="cursor-pointer"
+                        onClick={() => setPhoneShow(false)}
+                      >
+                        <Link href="/progress">DSA</Link>
+                      </li>
+                      <li
+                        className="cursor-pointer"
+                        onClick={() => setPhoneShow(false)}
+                      >
+                        <Link href="/contact">Contact</Link>
+                      </li>
+                      <li
+                        className="cursor-pointer"
+                        onClick={() => setPhoneShow(false)}
+                      >
+                        <Link href="/work">Works</Link>
+                      </li>
+                      <li
+                        className="cursor-pointer"
+                        onClick={() => setPhoneShow(false)}
+                      >
+                        <Link href="/resume">Resume</Link>
+                      </li>
+                    </ul>
+                  </div>
                 </>
               )}
             </div>
           </div>
         </>
       ) : (
-        <div>
-          <ul className="flex flex-column text-2xl float-end my-8 px-16 text-gray-300">
-            {/* <li className="mx-10"><Link href="/">Home</Link></li>
-          <li className="mx-10"><Link href="/about">About</Link></li> */}
-            <li className="mx-10">
+        <div className="flex justify-center py-4">
+          <ul className="flex space-x-8 text-xl text-gray-300">
+            <li className="cursor-pointer">
+              <Link href="/">Home</Link>
+            </li>
+            <li className="cursor-pointer">
               <Link href="/blog">Blog</Link>
             </li>
-            <li className="mx-10">
+            <li className="cursor-pointer">
               <Link href="/progress">DSA</Link>
             </li>
-            <li className="mx-10">
+            <li className="cursor-pointer">
               <Link href="/contact">Contact</Link>
             </li>
-            <li className="mx-10">
+            <li className="cursor-pointer">
               <Link href="/work">Works</Link>
             </li>
-            <li className="mx-10">
+            <li className="cursor-pointer">
               <Link href="/resume">Resume</Link>
             </li>
           </ul>
