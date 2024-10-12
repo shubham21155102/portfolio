@@ -6006,7 +6006,7 @@
                             "post_link": "https://takeuforward.org/data-structure/count-subsets-with-sum-k-dp-17/",
                             "sl_no_a2z": 4,
                             "sub_step_no": 4,
-                            "p2_link": null,
+                            "p2_link":"https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1",
                             "step_title": "Dynamic Programming [Patterns and Problems]",
                             "p1_link": "https://www.codingninjas.com/studio/problems/count-subsets-with-sum-k_3952532?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf",
                             "sub_step_title": "DP on Subsequences"
@@ -6020,7 +6020,7 @@
                             "post_link": "https://takeuforward.org/data-structure/count-partitions-with-given-difference-dp-18/",
                             "sl_no_a2z": 5,
                             "sub_step_no": 4,
-                            "p2_link": "https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1",
+                            "p2_link": "https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1",
                             "step_title": "Dynamic Programming [Patterns and Problems]",
                             "p1_link": "https://www.codingninjas.com/studio/problems/partitions-with-given-difference_3751628?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf",
                             "sub_step_title": "DP on Subsequences"
