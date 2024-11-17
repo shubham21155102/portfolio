@@ -6920,8 +6920,22 @@
                             "sl_no_a2z": 1,
                             "sub_step_no": 1,
                             "p2_link": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/",
-                            "step_title": "Strings",
-                            "p1_link": "null",
+                            "step_title": "Design Data Structures",
+                            "p1_link": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/",
+                            "sub_step_title": "Hard Problems"
+                        },
+                        {
+                            "id": "insert-delete-getrandom-o1-duplicates-allowed",
+                            "tags": "",
+                            "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+                            "step_no": 19,
+                            "yt_link": null,
+                            "post_link": null,
+                            "sl_no_a2z": 2,
+                            "sub_step_no": 1,
+                            "p2_link": "https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/",
+                            "step_title": "Design Data Structures",
+                            "p1_link": "https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/",
                             "sub_step_title": "Hard Problems"
                         }
                         
