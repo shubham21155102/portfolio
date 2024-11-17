@@ -6901,7 +6901,35 @@
                     ]
                 }
             ]
+        },
+        {
+            "sl_no": 19,
+            "title": "Design Data Structures",
+            "sub_steps": [
+                {
+                    "sl_no": 1,
+                    "title": "Design Problems",
+                    "topics": [
+                        {
+                            "id": "insert-delete-getrandom-o1",
+                            "tags": "",
+                            "title": "Insert Delete GetRandom O(1)",
+                            "step_no": 19,
+                            "yt_link": null,
+                            "post_link": null,
+                            "sl_no_a2z": 1,
+                            "sub_step_no": 1,
+                            "p2_link": "https://leetcode.com/problems/insert-delete-getrandom-o1/description/",
+                            "step_title": "Strings",
+                            "p1_link": "null",
+                            "sub_step_title": "Hard Problems"
+                        }
+                        
+                    ]
+                }
+            ]
         }
+
     ],
     "lcLinks": [
         null,
