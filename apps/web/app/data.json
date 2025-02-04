@@ -1,0 +1,32 @@
+[
+    {
+      "id": 1,
+      "company": "Company A",
+      "position": "Software Development Intern",
+      "description": "Worked on a team to develop a web application using React and Node.js",
+      "startDate": "2020-05-01",
+      "endDate": "2020-08-31",
+      "skills": ["React", "Node.js", "JavaScript"],
+      "image": "/company-a-logo.png"
+    },
+    {
+      "id": 2,
+      "company": "Company B",
+      "position": "Data Science Intern",
+      "description": "Worked on a team to develop a machine learning model using Python and TensorFlow",
+      "startDate": "2021-06-01",
+      "endDate": "2021-09-30",
+      "skills": ["Python", "TensorFlow", "Machine Learning"],
+      "image": "/company-b-logo.png"
+    },
+    {
+      "id": 3,
+      "company": "Company C",
+      "position": "Cybersecurity Intern",
+      "description": "Worked on a team to develop a security system using C++ and Linux",
+      "startDate": "2022-01-01",
+      "endDate": "2022-04-30",
+      "skills": ["C++", "Linux", "Cybersecurity"],
+      "image": "/company-c-logo.png"
+    }
+  ]
