@@ -27,9 +27,21 @@ interface Experience {
   image: string;
 }
 
+interface Education {
+  id: number;
+  institution: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+  grade: string;
+  skills: string[];
+  logo: string;
+}
+
 export default function Page(): JSX.Element {
   const [internships, setInternships] = useState<Internship[]>([]);
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [education, setEducation] = useState<Education[]>([]);
 
   useEffect(() => {
     const internshipData = [
@@ -218,8 +230,43 @@ export default function Page(): JSX.Element {
       },
     ];
 
+    const educationData = [
+      {
+        id: 1,
+        institution: "Indian Institute of Technology (Banaras Hindu University), Varanasi",
+        degree: "Bachelor of Technology - BTech, Mining",
+        startDate: "2021",
+        endDate: "2025",
+        grade: "CGPA: 8.63",
+        skills: ["Node.js", "User Interface Design", "Front-End Development", "Responsive Web Design", "Back-End Web Development"],
+        logo: "https://media.licdn.com/dms/image/v2/C4D0BAQHyenVUtyQrLg/company-logo_100_100/company-logo_100_100/0/1631309569195?e=1746662400&v=beta&t=fgUDvyYmXlSDS3dhnfTkc17ZvfwaqcaV0H36qpINNEc"
+      },
+      {
+        id: 2,
+        institution: "DAUDNAGAR COLLEGE DAUDNAGAR",
+        degree: "Intermediate, PCM",
+        startDate: "Apr 2018",
+        endDate: "Feb 2020",
+        grade: "District Rank (<10) State Rank (<20)",
+        skills: [],
+        logo: "https://www.daudnagarcollege.ac.in/upload/images/16729045601624091965logo.png"
+       
+      },
+      {
+        id: 3,
+        institution: "Simultala Awasiya Vidyalaya",
+        degree: "Matriculation",
+        startDate: "Dec 2013",
+        endDate: "Feb 2018",
+        grade: "Overall Bihar Rank - 14",
+        skills: [],
+        logo: "https://savbihar.ac.in/wp-content/uploads/2021/04/simultala_logo.jpg"
+      }
+    ];
+
     setInternships(internshipData);
     setExperiences(experienceData);
+    setEducation(educationData);
   }, []);
 
   return (
@@ -243,55 +290,7 @@ export default function Page(): JSX.Element {
         </div>
       </div>
 
-      {/* Internship Section */}
-      {/* <h2 className="text-4xl font-bold text-center text-white mb-12">Internships</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-full">
-        {internships.map((internship) => (
-          <motion.div
-            key={internship.id}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 w-full min-h-[300px] flex flex-col"
-          >
-            <div className="flex items-center space-x-4 mb-4">
-              {internship.image && (
-                <motion.div whileHover={{ rotate: 15 }}>
-                  <Image
-                    src={internship.image}
-                    alt={internship.company}
-                    width={60}
-                    height={60}
-                    className="rounded-full border-2 border-white bg-white/10 p-1"
-                  />
-                </motion.div>
-              )}
-              <div className="w-full">
-                <h3 className="text-xl font-bold text-white">{internship.company}</h3>
-                <p className="text-blue-200 font-medium">{internship.position}</p>
-              </div>
-            </div>
-            <p className="text-gray-200 text-sm flex-grow">{internship.description}</p>
-            <div className="flex justify-between text-sm text-blue-100 mt-4">
-              <span>{internship.startDate}</span>
-              <span>{internship.endDate}</span>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {internship.skills.map((skill, skillIndex) => (
-                <motion.span
-                  key={skillIndex}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: skillIndex * 0.1 }}
-                  className="px-3 py-1 bg-blue-500/20 text-blue-200 rounded-full text-xs"
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div> */}
+    
 
       {/* Experience Section */}
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-8 mt-10">Experiences</h2>
@@ -328,6 +327,53 @@ export default function Page(): JSX.Element {
             </div>
             <div className="flex flex-wrap gap-2 mt-3">
               {experience.skills.map((skill, skillIndex) => (
+                <motion.span
+                  key={skillIndex}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: skillIndex * 0.1 }}
+                  className="px-2 py-1 bg-blue-500/20 text-blue-200 rounded-full text-xs"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+         {/* Education Section */}
+      <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-8 mt-20">Education</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 max-w-full">
+        {education.map((edu) => (
+          <motion.div
+            key={edu.id}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 w-full min-h-[300px] flex flex-col"
+          >
+            <div className="flex items-center space-x-4 mb-4">
+              <motion.div whileHover={{ rotate: 15 }}>
+                <Image
+                  src={edu.logo}
+                  alt={edu.institution}
+                  width={60}
+                  height={60}
+                  className="rounded-full border-2 border-white bg-white/10 p-1"
+                />
+              </motion.div>
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-white">{edu.institution}</h3>
+                <p className="text-blue-200 text-sm">{edu.degree}</p>
+              </div>
+            </div>
+            <div className="flex justify-between text-sm text-blue-100 mt-auto">
+              <span>{edu.startDate}</span>
+              <span>{edu.endDate}</span>
+            </div>
+            <p className="text-gray-200 text-sm mt-2">{edu.grade}</p>
+            <div className="flex flex-wrap gap-2 mt-3">
+              {edu.skills.map((skill, skillIndex) => (
                 <motion.span
                   key={skillIndex}
                   initial={{ scale: 0 }}

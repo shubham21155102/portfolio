@@ -6,7 +6,10 @@ const nextConfig = {
       'picsum.photos',
       'images.unsplash.com', 
       'source.unsplash.com',
-      'media.licdn.com'
+      'media.licdn.com',
+      'via.placeholder.com',
+      'savbihar.ac.in',
+      'www.daudnagarcollege.ac.in',
     ],
   },
 }
