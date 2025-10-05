@@ -29,53 +29,53 @@ const Header = () => {
     <>
       {button ? (
         <>
-          <div className="flex justify-between items-center py-4 px-8">
-            <div className="text-2xl text-gray-300">
+          <div className="flex justify-between items-center py-6 px-8 backdrop-blur-md bg-slate-900/30 border-b border-white/10">
+            <div className="text-2xl text-white">
               {!phoneShow ? (
                 <MenuIcon
                   onClick={() => {
                     setPhoneShow(!phoneShow);
                   }}
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:text-primary-400 transition-colors"
                 />
               ) : (
                 <>
-                  <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-90 z-50">
+                  <div className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 bg-opacity-95 z-50 backdrop-blur-xl">
                     <div
-                      className="mb-4 cursor-pointer"
+                      className="mb-8 cursor-pointer text-white hover:text-primary-400 transition-colors"
                       onClick={() => {
                         setPhoneShow(false);
                       }}
                     >
                       <CancelIcon fontSize="large" />
                     </div>
-                    <ul className="flex flex-col items-center text-xl text-gray-300 space-y-4">
+                    <ul className="flex flex-col items-center text-2xl text-white space-y-6">
                       <li
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
                         onClick={() => setPhoneShow(false)}
                       >
                         <Link href="/blog">Blog</Link>
                       </li>
                       <li
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
                         onClick={() => setPhoneShow(false)}
                       >
                         <Link href="/progress">DSA</Link>
                       </li>
                       <li
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
                         onClick={() => setPhoneShow(false)}
                       >
                         <Link href="/contact">Contact</Link>
                       </li>
                       <li
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
                         onClick={() => setPhoneShow(false)}
                       >
                         <Link href="/work">Works</Link>
                       </li>
                       <li
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
                         onClick={() => setPhoneShow(false)}
                       >
                         <Link href="/resume">Resume</Link>
@@ -88,25 +88,31 @@ const Header = () => {
           </div>
         </>
       ) : (
-        <div className="flex justify-center py-4">
-          <ul className="flex space-x-8 text-xl text-gray-300">
-            <li className="cursor-pointer">
+        <div className="flex justify-center py-6 backdrop-blur-md bg-slate-900/30 border-b border-white/10">
+          <ul className="flex space-x-10 text-lg text-white font-medium">
+            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
               <Link href="/">Home</Link>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
               <Link href="/blog">Blog</Link>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
               <Link href="/progress">DSA</Link>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
               <Link href="/contact">Contact</Link>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
               <Link href="/work">Works</Link>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
-            <li className="cursor-pointer">
+            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
               <Link href="/resume">Resume</Link>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
             </li>
           </ul>
         </div>
