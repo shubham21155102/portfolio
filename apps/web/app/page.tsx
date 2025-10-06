@@ -347,80 +347,107 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Header />
-      <div className="flex flex-row justify-center items-center my-20 sm:my-60">
-        <div className="flex flex-col justify-center items-center">
-          <Image
-            src={"/shubham.jpg"}
-            alt="Picture of the author"
-            width={200}
-            height={200}
-            className="rounded-full"
-          />
-          <div className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+      <div className="flex flex-row justify-center items-center my-32 sm:my-40 px-4">
+        <div className="flex flex-col justify-center items-center space-y-6">
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-purple rounded-full blur-xl opacity-50 animate-pulse-slow"></div>
+            <Image
+              src={"/shubham.jpg"}
+              alt="Picture of the author"
+              width={200}
+              height={200}
+              className="rounded-full border-4 border-white/20 shadow-2xl relative z-10"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-4xl sm:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary-300 via-accent-purple to-accent-pink"
+          >
             Shubham Patel
-          </div>
-          <div className="text-lg sm:text-2xl font-bold tracking-tight text-white">
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="text-lg sm:text-2xl font-medium text-center text-gray-200 max-w-3xl"
+          >
             Upcoming Associate Software Engineer @
             <Link
               href="https://www.linkedin.com/company/quantumstreetai"
-              className="text-blue-500 hover:underline"
+              className="text-primary-400 hover:text-primary-300 transition-colors ml-1 underline decoration-primary-400/50 underline-offset-4"
             >
-              {" "}
               Quantum Stream AI
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Experience Section */}
-      <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-8 mt-10">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-4xl sm:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-accent-purple mb-12 mt-20"
+      >
         Experiences
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 max-w-full">
-        {experiences.map((experience) => (
+      </motion.h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 max-w-7xl mx-auto">
+        {experiences.map((experience, index) => (
           <motion.div
             key={experience.id}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 shadow-xl border border-white/20 w-full min-h-[300px] flex flex-col"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            whileHover={{ y: -8, transition: { duration: 0.2 } }}
+            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 w-full min-h-[320px] flex flex-col group hover:border-primary-400/50 transition-all duration-300"
           >
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex items-center space-x-4 mb-4">
               {experience.image && (
-                <motion.div whileHover={{ rotate: 15 }}>
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                  className="flex-shrink-0"
+                >
                   <Image
                     src={experience.image}
                     alt={experience.company}
-                    width={60}
-                    height={60}
-                    className="rounded-full border-2 border-white bg-white/10 p-1"
+                    width={64}
+                    height={64}
+                    className="rounded-full border-2 border-primary-400/50 bg-white/10 p-1 shadow-lg"
                   />
                 </motion.div>
               )}
               <div className="w-full">
-                <h3 className="text-lg sm:text-xl font-bold text-white">
+                <h3 className="text-xl font-bold text-white group-hover:text-primary-300 transition-colors">
                   {experience.company}
                 </h3>
-                <p className="text-blue-200 font-medium">
+                <p className="text-primary-200 font-medium">
                   {experience.position}
                 </p>
               </div>
             </div>
-            <p className="text-gray-200 text-sm flex-grow">
+            <p className="text-gray-300 text-sm flex-grow leading-relaxed">
               {experience.description}
             </p>
-            <div className="flex justify-between text-sm text-blue-100 mt-4">
+            <div className="flex justify-between text-sm text-primary-100 mt-4 font-medium">
               <span>{experience.startDate}</span>
               <span>{experience.endDate}</span>
             </div>
-            <div className="flex flex-wrap gap-2 mt-3">
+            <div className="flex flex-wrap gap-2 mt-4">
               {experience.skills.map((skill, skillIndex) => (
                 <motion.span
                   key={skillIndex}
                   initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: skillIndex * 0.1 }}
-                  className="px-2 py-1 bg-blue-500/20 text-blue-200 rounded-full text-xs"
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: skillIndex * 0.05 }}
+                  className="px-3 py-1 bg-gradient-to-r from-primary-500/30 to-accent-purple/30 text-primary-100 rounded-full text-xs font-medium border border-primary-400/30 hover:border-primary-400 transition-all"
                 >
                   {skill}
                 </motion.span>
@@ -430,48 +457,58 @@ export default function Page(): JSX.Element {
         ))}
       </div>
       {/* Education Section */}
-      <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-8 mt-20">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-4xl sm:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-accent-purple mb-12 mt-24"
+      >
         Education
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 max-w-full">
-        {education.map((edu) => (
+      </motion.h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 max-w-7xl mx-auto mb-20">
+        {education.map((edu, index) => (
           <motion.div
             key={edu.id}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 w-full min-h-[300px] flex flex-col"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            whileHover={{ y: -8, transition: { duration: 0.2 } }}
+            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 w-full min-h-[320px] flex flex-col group hover:border-primary-400/50 transition-all duration-300"
           >
             <div className="flex items-center space-x-4 mb-4">
-              <motion.div whileHover={{ rotate: 15 }}>
+              <motion.div
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+                className="flex-shrink-0"
+              >
                 <Image
                   src={edu.logo}
                   alt={edu.institution}
-                  width={60}
-                  height={60}
-                  className="rounded-full border-2 border-white bg-white/10 p-1"
+                  width={64}
+                  height={64}
+                  className="rounded-full border-2 border-primary-400/50 bg-white/10 p-1 shadow-lg"
                 />
               </motion.div>
               <div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">
+                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-primary-300 transition-colors">
                   {edu.institution}
                 </h3>
-                <p className="text-blue-200 text-sm">{edu.degree}</p>
+                <p className="text-primary-200 text-sm">{edu.degree}</p>
               </div>
             </div>
-            <div className="flex justify-between text-sm text-blue-100 mt-auto">
+            <div className="flex justify-between text-sm text-primary-100 mt-auto font-medium">
               <span>{edu.startDate}</span>
               <span>{edu.endDate}</span>
             </div>
-            <p className="text-gray-200 text-sm mt-2">{edu.grade}</p>
-            <div className="flex flex-wrap gap-2 mt-3">
+            <p className="text-gray-300 text-sm mt-3">{edu.grade}</p>
+            <div className="flex flex-wrap gap-2 mt-4">
               {edu.skills.map((skill, skillIndex) => (
                 <motion.span
                   key={skillIndex}
                   initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: skillIndex * 0.1 }}
-                  className="px-2 py-1 bg-blue-500/20 text-blue-200 rounded-full text-xs"
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: skillIndex * 0.05 }}
+                  className="px-3 py-1 bg-gradient-to-r from-primary-500/30 to-accent-purple/30 text-primary-100 rounded-full text-xs font-medium border border-primary-400/30 hover:border-primary-400 transition-all"
                 >
                   {skill}
                 </motion.span>
@@ -482,21 +519,24 @@ export default function Page(): JSX.Element {
       </div>
 
       {/* Chatbot Container */}
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-6 right-6 z-50">
         {isChatOpen ? (
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl border border-white/20 w-80 h-96 flex flex-col"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 w-96 h-[500px] flex flex-col"
           >
-            <div className="flex justify-between items-center p-4 border-b border-white/20">
-              <div className="flex items-center space-x-2">
-                <FaRobot className="text-blue-400 text-xl" />
-                <span className="text-white font-semibold">Chat Assistant</span>
+            <div className="flex justify-between items-center p-4 border-b border-white/20 bg-gradient-to-r from-primary-500/20 to-accent-purple/20 rounded-t-2xl">
+              <div className="flex items-center space-x-3">
+                <div className="bg-gradient-to-r from-primary-400 to-accent-purple p-2 rounded-lg">
+                  <FaRobot className="text-white text-xl" />
+                </div>
+                <span className="text-white font-semibold text-lg">Chat Assistant</span>
               </div>
               <button
                 onClick={() => setIsChatOpen(false)}
-                className="text-white/50 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
               >
                 <FaTimes className="text-lg" />
               </button>
@@ -504,22 +544,24 @@ export default function Page(): JSX.Element {
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {messages.map((msg, idx) => (
-                <div
+                <motion.div
                   key={idx}
+                  initial={{ opacity: 0, x: msg.isUser ? 20 : -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   className={`flex ${
                     msg.isUser ? "justify-end" : "justify-start"
                   }`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
+                    className={`max-w-[80%] rounded-2xl p-3 ${
                       msg.isUser
-                        ? "bg-blue-500/30 text-white"
-                        : "bg-white/10 text-white"
+                        ? "bg-gradient-to-r from-primary-500 to-accent-purple text-white"
+                        : "bg-white/10 text-white border border-white/20"
                     }`}
                   >
                     {msg.text}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -533,11 +575,11 @@ export default function Page(): JSX.Element {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-white/5 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 bg-white/5 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-400 border border-white/10"
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500/30 hover:bg-blue-500/40 text-white px-4 py-2 rounded-lg transition-colors"
+                  className="bg-gradient-to-r from-primary-500 to-accent-purple hover:from-primary-600 hover:to-accent-purple/90 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium transform hover:scale-105"
                 >
                   Send
                 </button>
@@ -549,9 +591,9 @@ export default function Page(): JSX.Element {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsChatOpen(true)}
-            className="bg-blue-500/30 hover:bg-blue-500/40 text-white p-4 rounded-full shadow-lg backdrop-blur-lg border border-white/20"
+            className="bg-gradient-to-r from-primary-500 to-accent-purple hover:from-primary-600 hover:to-accent-purple/90 text-white p-5 rounded-full shadow-2xl backdrop-blur-lg border border-white/20 transition-all duration-300"
           >
-            <FaRobot className="text-2xl" />
+            <FaRobot className="text-3xl" />
           </motion.button>
         )}
       </div>
