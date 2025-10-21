@@ -74,7 +74,7 @@ const IndividualTopics = (props: any) => {
     }
   };
 
-  const allTopics = topicData?.sub_steps.flatMap((step) => step.topics) || [];
+  const allTopics = topicData?.sub_steps?.flatMap((step) => step.topics) || [];
   const completionPercentage =
     allTopics.length > 0
       ? (solvedQuestions.filter((id) => allTopics.some((topic) => topic.id === id)).length /
