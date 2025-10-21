@@ -7,19 +7,18 @@ import Footer from "../../Footer";
 import Image from "next/image";
 import ProgressHeader from "../../ProgressHeader";
 import { Button } from "@mui/material";
+
 const SOLVED_CLASS = "bg-green-100";
-const UNSOLVED_CLASS = "bg-red-100";
+const UNSOLVED_CLASS = "bg-gray-100";
+
 const IndividualTopics = (props: any) => {
   const [userId, setUserId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [solvedButtonClicked, setSolvedButtonClicked] = useState(false);
-  const [loadingStates, setLoadingStates] = useState<{
-    [key: string]: boolean;
-  }>({});
+  const [loadingStates, setLoadingStates] = useState<{ [key: string]: boolean }>({});
   const [solvedQuestions, setSolvedQuestions] = useState<string[]>([]);
   const [reload, setReload] = useState(false);
   const slug = props.params.slug;
+  const topicData = dsaData.data[slug - 1];
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
@@ -31,8 +30,7 @@ const IndividualTopics = (props: any) => {
   }, []);
 
   useEffect(() => {
-    let solvedQuestionsFromLocalStorage =
-      localStorage.getItem("solvedQuestions");
+    let solvedQuestionsFromLocalStorage = localStorage.getItem("solvedQuestions");
     if (!solvedQuestionsFromLocalStorage) {
       const fetchSolvedQuestions = async () => {
         try {
@@ -40,274 +38,143 @@ const IndividualTopics = (props: any) => {
             `https://api.shubhamiitbhu.in/questions/questions`,
             {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                userId: userId,
-              }),
-            },
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ userId }),
+            }
           );
           const data = await response.json();
           setSolvedQuestions(data.data);
-          await localStorage.setItem(
-            "solvedQuestions",
-            JSON.stringify(data.data),
-          );
-          console.log(data.data);
+          await localStorage.setItem("solvedQuestions", JSON.stringify(data.data));
         } catch (error) {
           console.error("Error fetching solved questions:", error);
         }
       };
-
-      if (userId) {
-        fetchSolvedQuestions();
-      }
+      if (userId) fetchSolvedQuestions();
     } else {
       setSolvedQuestions(JSON.parse(solvedQuestionsFromLocalStorage));
     }
   }, [userId, reload]);
-  function isProblemSolved(problemId: string) {
-    try {
-      const q = solvedQuestions.includes(problemId);
-      return q;
-    } catch (e) {
-      return false;
-    }
-  }
-  async function problemSolved(userId: string, problemId: string) {
+
+  const isProblemSolved = (problemId: string) => solvedQuestions.includes(problemId);
+
+  const toggleProblemStatus = async (problemId: string, markAsSolved: boolean) => {
     await localStorage.removeItem("solvedQuestions");
+    setLoadingStates((prev) => ({ ...prev, [problemId]: true }));
     try {
-      setLoadingStates((prevLoadingStates) => ({
-        ...prevLoadingStates,
-        [problemId]: true,
-      }));
-      setSolvedButtonClicked(true);
-      const response = await fetch("https://api.shubhamiitbhu.in/questions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: userId,
-          questionid: problemId,
-        }),
+      await fetch("https://api.shubhamiitbhu.in/questions", {
+        method: markAsSolved ? "POST" : "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userid: userId, questionid: problemId }),
       });
       setReload(!reload);
-      const data = await response.json();
-      console.log(data);
-      setSolvedButtonClicked(false);
-      setLoadingStates((prevLoadingStates) => ({
-        ...prevLoadingStates,
-        [problemId]: false,
-      }));
     } catch (e) {
-      console.log(e);
+      console.error(e);
+    } finally {
+      setLoadingStates((prev) => ({ ...prev, [problemId]: false }));
     }
-  }
-  async function problemUnsolved(userId: string, problemId: string) {
-    await localStorage.removeItem("solvedQuestions");
-    try {
-      setLoadingStates((prevLoadingStates) => ({
-        ...prevLoadingStates,
-        [problemId]: true,
-      }));
-      setSolvedButtonClicked(true);
-      const response = await fetch("https://api.shubhamiitbhu.in/questions", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: userId,
-          questionid: problemId,
-        }),
-      });
-      const data = await response.json();
-      setReload(!reload);
-      console.log(data);
-      setSolvedButtonClicked(false);
-      setLoadingStates((prevLoadingStates) => ({
-        ...prevLoadingStates,
-        [problemId]: false,
-      }));
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  useEffect(() => {}, [solvedButtonClicked]);
+  };
+
+  const allTopics = topicData?.sub_steps.flatMap((step) => step.topics) || [];
+  const completionPercentage =
+    allTopics.length > 0
+      ? (solvedQuestions.filter((id) => allTopics.some((topic) => topic.id === id)).length /
+          allTopics.length) *
+        100
+      : 0;
+
   return (
-    <>
-      <div className="flex flex-col h-screen">
-        <ProgressHeader />
-        {/* <table >
-        <thead>
-    <tr className="text-red-900">
-      <th style={{width:"5%"}}>Sr No. </th>
-      <th style={{width:"50%"}}>Question </th>
-      <th style={{width:"5%"}}>YouTube</th>
-      <th style={{width:"5%"}}>Coding Ninjas</th>
-      <th style={{width:"5%"}}>LeetCode</th>
-      <th style={{width:"30%"}}>Status</th>
-    </tr>
-  </thead>
-        </table> */}
-        <div className="flex-grow px-4 py-8">
-          {dsaData.data[slug - 1]?.sub_steps.map((item, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-4 mb-8">
-              <h2 className="text-lg font-bold text-black">{item.sl_no}</h2>
-              <p className="mt-2 text-gray-800">{item.title}</p>
-              <div className="mt-4">
-                <table className="w-full">
-                  <tbody>
-                    {item.topics.map((topic, index) => (
-                      <tr
-                        key={index}
-                        className={`rounded-lg shadow-md p-4 mb-8 ${
-                          isProblemSolved(topic.id)
-                            ? SOLVED_CLASS
-                            : UNSOLVED_CLASS
-                        }`}
-                      >
-                        <td className="p-4 " style={{ width: "5%" }}>
-                          <p className="text-lg font-bold text-black mr-2">
-                            {topic.sl_no_a2z}
-                          </p>
-                        </td>
-                        <td className="p-4" style={{ width: "50%" }}>
-                          <p className="mt-2 text-gray-900 mr-2 px-10">
-                            {topic.title}
-                          </p>
-                        </td>
-                        <td className="p-4" style={{ width: "10%" }}>
-                          <Link
-                            href={`${topic.yt_link}`}
-                            passHref
-                            target="__blank"
-                          >
-                            <Image
-                              src={"/youtube.svg"}
-                              alt="YouTube Link"
-                              width={35}
-                              height={35}
-                              className="rounded-full"
-                            />
-                          </Link>
-                        </td>
-                        <td className="p-4" style={{ width: "10%" }}>
-                          {topic.p1_link && (
-                            <Link href={`${topic.p1_link}`} target="__blank">
-                              <Image
-                                src={"/cn.svg"}
-                                alt="Link 1"
-                                width={100}
-                                height={100}
-                                className="rounded-full"
-                              />
-                            </Link>
-                          )}
-                        </td>
-                        <td className="p-4" style={{ width: "10%" }}>
-                          {topic.p2_link && (
-                            <Link href={`${topic.p2_link}`} target="__blank">
-                              <Image
-                                src={"/leetcode.png"}
-                                alt="Link 2"
-                                width={25}
-                                height={25}
-                                className="rounded-full"
-                              />
-                            </Link>
-                          )}
-                        </td>
-                        <td style={{ width: "25%" }}>
-                          {loggedIn && (
-                            <>
-                              {isProblemSolved(topic.id) ? (
-                                <Button
-                                  variant="contained"
-                                  color="primary"
-                                  className="p-2"
-                                  onClick={() =>
-                                    problemUnsolved(userId, topic.id)
-                                  }
-                                  disabled={loadingStates[topic.id]}
-                                >
-                                  {loadingStates[topic.id] ? (
-                                    <>
-                                      <ProgressBar
-                                        visible={true}
-                                        height="40"
-                                        width="120"
-                                        barColor="#4fa94d"
-                                        // color="#4fa94d"
-                                        ariaLabel="progress-bar-loading"
-                                        wrapperStyle={{}}
-                                        wrapperClass=""
-                                      />
-                                    </>
-                                  ) : (
-                                    <>Mark as Unsolved</>
-                                  )}
-                                </Button>
-                              ) : (
-                                <Button
-                                  variant="contained"
-                                  color="primary"
-                                  className="p-2"
-                                  onClick={() =>
-                                    problemSolved(userId, topic.id)
-                                  }
-                                  disabled={loadingStates[topic.id]}
-                                >
-                                  {loadingStates[topic.id] ? (
-                                    <>
-                                      <ProgressBar
-                                        visible={true}
-                                        height="40"
-                                        width="40"
-                                        barColor="#4fa94d"
-                                        // color="#4fa94d"
-                                        ariaLabel="progress-bar-loading"
-                                        wrapperStyle={{}}
-                                        wrapperClass=""
-                                      />
-                                    </>
-                                  ) : (
-                                    <>Mark as Solved</>
-                                  )}
-                                </Button>
-                              )}
-                            </>
-                          )}
-                        </td>
-                        <td>
-                          {/* {userId === "d592f4cd-8f4d-4af0-9d80-723827eeb65f" ? ( */}
-                          <Link
-                            href={`/progress/${slug}/${topic.id}`}
-                            className="bg-gray"
-                            target="__blank"
-                          >
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              className="p-2"
-                            >
-                              Submit Code
-                            </Button>
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <ProgressHeader />
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">{topicData?.title}</h1>
+          <div className="flex items-center mt-4">
+            <div className="w-full bg-gray-200 rounded-full h-4">
+              <div
+                className="bg-blue-600 h-4 rounded-full"
+                style={{ width: `${completionPercentage}%` }}
+              ></div>
             </div>
-          ))}
+            <span className="ml-4 text-gray-600 font-semibold">
+              {completionPercentage.toFixed(2)}%
+            </span>
+          </div>
         </div>
-        <Footer />
-      </div>
-    </>
+
+        {topicData?.sub_steps.map((item, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">{item.title}</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-gray-600">
+                    <th className="p-4">#</th>
+                    <th className="p-4">Problem</th>
+                    <th className="p-4">Links</th>
+                    <th className="p-4">Status</th>
+                    <th className="p-4">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {item.topics.map((topic, topicIndex) => (
+                    <tr
+                      key={topicIndex}
+                      className={`border-t ${
+                        isProblemSolved(topic.id) ? SOLVED_CLASS : UNSOLVED_CLASS
+                      }`}
+                    >
+                      <td className="p-4 font-bold text-gray-800">{topic.sl_no_a2z}</td>
+                      <td className="p-4 text-gray-900">{topic.title}</td>
+                      <td className="p-4 flex items-center space-x-4">
+                        <Link href={topic.yt_link || "#"} passHref target="_blank">
+                          <Image src="/youtube.svg" alt="YouTube" width={28} height={28} />
+                        </Link>
+                        {topic.p1_link && (
+                          <Link href={topic.p1_link} target="_blank">
+                            <Image src="/cn.svg" alt="Coding Ninjas" width={28} height={28} />
+                          </Link>
+                        )}
+                        {topic.p2_link && (
+                          <Link href={topic.p2_link} target="_blank">
+                            <Image src="/leetcode.png" alt="LeetCode" width={22} height={22} />
+                          </Link>
+                        )}
+                      </td>
+                      <td className="p-4">
+                        {loggedIn && (
+                          <Button
+                            variant="contained"
+                            color={isProblemSolved(topic.id) ? "secondary" : "primary"}
+                            onClick={() => toggleProblemStatus(topic.id, !isProblemSolved(topic.id))}
+                            disabled={loadingStates[topic.id]}
+                          >
+                            {loadingStates[topic.id] ? (
+                              <ProgressBar visible height="24" width="24" barColor="#fff" />
+                            ) : isProblemSolved(topic.id) ? (
+                              "Mark as Unsolved"
+                            ) : (
+                              "Mark as Solved"
+                            )}
+                          </Button>
+                        )}
+                      </td>
+                      <td className="p-4">
+                        <Link href={`/progress/${slug}/${topic.id}`} target="_blank">
+                          <Button variant="outlined" color="primary">
+                            Solve
+                          </Button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </main>
+      <Footer />
+    </div>
   );
 };
 
