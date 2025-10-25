@@ -1,123 +1,111 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import MenuIcon from "@mui/icons-material/Menu";
-import CancelIcon from "@mui/icons-material/Cancel";
 
-const Header = () => {
-  const [button, setButton] = useState(true);
-  const [phoneShow, setPhoneShow] = useState(false);
+const Header: React.FC = () => {
+  const [open, setOpen] = useState(false);
 
-  const showButton = () => {
-    if (window.innerWidth > 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
-  };
-
-  useEffect(() => {
-    showButton();
-    window.addEventListener("resize", showButton);
-
-    return () => {
-      window.removeEventListener("resize", showButton);
-    };
-  }, []);
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/blog", label: "Blog" },
+    { href: "/progress", label: "DSA" },
+    { href: "/work", label: "Works" },
+    { href: "/contact", label: "Contact" },
+    { href: "/resume", label: "Resume" },
+  ];
 
   return (
-    <>
-      {button ? (
-        <>
-          <div className="flex justify-between items-center py-6 px-8 backdrop-blur-md bg-slate-900/30 border-b border-white/10">
-            <div className="text-2xl text-white">
-              {!phoneShow ? (
-                <MenuIcon
-                  onClick={() => {
-                    setPhoneShow(!phoneShow);
-                  }}
-                  className="cursor-pointer hover:text-primary-400 transition-colors"
-                />
-              ) : (
-                <>
-                  <div className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 bg-opacity-95 z-50 backdrop-blur-xl">
-                    <div
-                      className="mb-8 cursor-pointer text-white hover:text-primary-400 transition-colors"
-                      onClick={() => {
-                        setPhoneShow(false);
-                      }}
-                    >
-                      <CancelIcon fontSize="large" />
-                    </div>
-                    <ul className="flex flex-col items-center text-2xl text-white space-y-6">
-                      <li
-                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
-                        onClick={() => setPhoneShow(false)}
-                      >
-                        <Link href="/blog">Blog</Link>
-                      </li>
-                      <li
-                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
-                        onClick={() => setPhoneShow(false)}
-                      >
-                        <Link href="/progress">DSA</Link>
-                      </li>
-                      <li
-                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
-                        onClick={() => setPhoneShow(false)}
-                      >
-                        <Link href="/contact">Contact</Link>
-                      </li>
-                      <li
-                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
-                        onClick={() => setPhoneShow(false)}
-                      >
-                        <Link href="/work">Works</Link>
-                      </li>
-                      <li
-                        className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110"
-                        onClick={() => setPhoneShow(false)}
-                      >
-                        <Link href="/resume">Resume</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </>
-              )}
-            </div>
+    <header className="fixed top-0 left-0 right-0 z-40 bg-slate-900/60 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Brand */}
+          <div className="flex items-center">
+            <Link href="/">
+              <span className="text-white text-xl font-semibold tracking-tight">Shubham</span>
+            </Link>
           </div>
-        </>
-      ) : (
-        <div className="flex justify-center py-6 backdrop-blur-md bg-slate-900/30 border-b border-white/10">
-          <ul className="flex space-x-10 text-lg text-white font-medium">
-            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
-              <Link href="/">Home</Link>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
-              <Link href="/blog">Blog</Link>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
-              <Link href="/progress">DSA</Link>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
-              <Link href="/contact">Contact</Link>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
-              <Link href="/work">Works</Link>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-            <li className="cursor-pointer hover:text-primary-400 transition-all duration-300 transform hover:scale-110 relative group">
-              <Link href="/resume">Resume</Link>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-          </ul>
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex md:items-center md:space-x-8">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-white hover:text-primary-400 transition-colors relative group"
+              >
+                {l.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full" />
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right side CTA / mobile button */}
+          <div className="flex items-center">
+            <div className="hidden md:block">
+              <Link
+                href="/login"
+                className="inline-flex items-center px-4 py-2 bg-primary-500 text-white rounded-md shadow-sm hover:bg-primary-600 transition"
+              >
+                Sign in
+              </Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              onClick={() => setOpen((s) => !s)}
+              className="ml-3 inline-flex items-center justify-center p-2 rounded-md text-white md:hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
+            >
+              {/* Hamburger / close icon */}
+              <svg
+                className={`h-6 w-6 transition-transform ${open ? "transform rotate-90" : ""}`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                {open ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
-      )}
-    </>
+      </div>
+
+      {/* Mobile menu panel */}
+      <div
+        className={`md:hidden ${open ? "block" : "hidden"} bg-slate-900/95 backdrop-blur-md border-t border-white/5`}
+        id="mobile-menu"
+      >
+        <div className="px-4 pt-4 pb-6 space-y-4">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="block text-white text-lg font-medium px-2 py-2 rounded hover:bg-slate-800/60 transition"
+            >
+              {l.label}
+            </Link>
+          ))}
+
+          <div className="pt-2">
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="block text-center w-full px-4 py-2 bg-primary-500 text-white rounded-md shadow-sm hover:bg-primary-600 transition"
+            >
+              Sign in
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 
