@@ -1,10 +1,31 @@
 :root {
+  /* Light theme defaults */
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
+  /* foreground / background as RGB triplets so we can interpolate with rgba/linear-gradient */
+  --foreground-rgb: 17, 24, 39; /* dark text */
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 249, 250, 251;
+
+  --callout-rgb: 255, 255, 255;
+  --callout-border-rgb: 200, 200, 200;
+  --card-rgb: 255, 255, 255;
+  --card-border-rgb: 226, 232, 240;
+
+  --glow-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    #667eea 0deg,
+    #764ba2 180deg,
+    #f093fb 360deg
+  );
+}
+
+/* Dark theme overrides: add the `dark` class to <html> or <body> to activate */
+.dark {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 15, 23, 42;
   --background-end-rgb: 30, 41, 59;
@@ -13,13 +34,6 @@
   --callout-border-rgb: 108, 108, 108;
   --card-rgb: 100, 100, 100;
   --card-border-rgb: 200, 200, 200;
-
-  --glow-conic: conic-gradient(
-    from 180deg at 50% 50%,
-    #667eea 0deg,
-    #764ba2 180deg,
-    #f093fb 360deg
-  );
 }
 
 * {
@@ -40,11 +54,10 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      135deg,
-      rgb(15, 23, 42) 0%,
-      rgb(30, 41, 59) 50%,
-      rgb(51, 65, 85) 100%
-    );
+    135deg,
+    rgb(var(--background-start-rgb)) 0%,
+    rgb(var(--background-end-rgb)) 100%
+  );
   min-height: 100vh;
   background-attachment: fixed;
 }
