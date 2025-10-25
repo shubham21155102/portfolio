@@ -4,6 +4,12 @@ import React, { useEffect, useRef, useState } from "react"
 type Message = { id: string; from: "user" | "bot"; text: string }
 
 export default function ChatBot() {
+  // runtime-configurable API endpoint. If you want the frontend to call a
+  // separate ai-agent microservice, set NEXT_PUBLIC_AI_ENDPOINT to its URL
+  // (example: "http://localhost:4000/api/ai"). Otherwise the app will call
+  // the built-in Next.js route at `/api/chat`.
+  const API_ENDPOINT = (process.env.NEXT_PUBLIC_AI_ENDPOINT as string) || "/api/chat"
+
   const [messages, setMessages] = useState<Message[]>([])
   const [text, setText] = useState("")
   const [loading, setLoading] = useState(false)
@@ -26,7 +32,8 @@ export default function ChatBot() {
     setLoading(true)
 
     try {
-      const res = await fetch("/api/chat", {
+      const url = API_ENDPOINT
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
