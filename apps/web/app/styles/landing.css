@@ -1,39 +1,11 @@
 :root {
-    --gradient1: linear-gradient(
-        49deg,
-        #fef4ff,
-        #e5ecee,
-        #e5ecee,
-        #c3ddf3,
-        #acc7f6,
-        #a1b9f9,
-        #d6c3ec,
-        #e1dffc,
-        #dadbfc,
-        #caccf4,
-        #cdacde
-    );
-    --gradient2: linear-gradient(
-        119deg,
-        cyan,
-        #52ab93,
-        #d3a450,
-        #a15090,
-        #c6388e
-    );
-    --gradient3: linear-gradient(49deg, #ab4da3, #52ab93, #d3a450);
-    --gradient4: linear-gradient(119deg, #52ab93, #d3a450, #a15090);
-    --app-header-gradient: linear-gradient(45deg, #fcea41, #f048c6);
-    --bluish: #3a4f7a;
-    --darkish: #2b3a55;
-    --visual-studio-light: #ffffff;
-    --visual-studio-dark: #1e1e1e;
-    --light-yellow: #f6f6c9;
-    --yellowish: #ffbf00;
-    --sky: #52ab93;
-    --coral: #e56e67;
-    --light-pink: #fea1bf;
-    --light-green: #86c8bc;
+    /* Modernized, reduced palette for landing visuals */
+    --primary: #14b8a6; /* cyan/teal */
+    --primary-600: #0d9488;
+    --accent: #7c3aed; /* purple */
+    --muted: #6b7280;
+    --surface: #ffffff;
+    --bg-gradient: linear-gradient(135deg, rgba(20,184,166,0.08), rgba(124,58,237,0.04));
 }
 
 @keyframes bg-animation {
