@@ -19,8 +19,12 @@ export const Button = ({
     "inline-flex items-center px-4 py-2 rounded-md font-medium transition shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1";
 
   const variants: Record<string, string> = {
-    primary: "bg-primary-600 text-white hover:bg-primary-500 focus:ring-primary-300",
-    ghost: "bg-transparent text-slate-700 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/50 focus:ring-slate-300",
+    // Glassy primary: translucent backdrop + subtle border and glow
+    primary:
+      "bg-white/10 dark:bg-slate-900/30 text-white border border-white/20 dark:border-slate-700/30 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-slate-800/40 focus:ring-primary-300",
+    // Ghost stays minimal but with glass hover
+    ghost:
+      "bg-transparent text-slate-700 dark:text-slate-100 hover:bg-white/5 dark:hover:bg-slate-800/50 border border-transparent hover:border-white/10",
   };
 
   return (

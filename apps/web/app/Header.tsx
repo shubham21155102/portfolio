@@ -52,13 +52,18 @@ const Header: React.FC = () => {
   ];
 
   return (
-  <header className="fixed top-0 left-0 right-0 z-40 bg-white/60 dark:bg-slate-900/72 backdrop-blur-sm border-b border-slate-200/30 dark:border-slate-700/40">
+  <header className="fixed top-0 left-0 right-0 z-40 glass bg-white/60 dark:bg-slate-900/72 border-b border-slate-200/20 dark:border-slate-700/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand */}
           <div className="flex items-center">
             <Link href="/">
-              <span className="text-white text-xl font-semibold tracking-tight">Shubham</span>
+              <span
+                className="text-xl font-semibold tracking-tight bg-clip-text text-transparent"
+                style={{ backgroundImage: "linear-gradient(90deg, rgba(6,182,212,1), rgba(124,58,237,1))" }}
+              >
+                Shubham
+              </span>
             </Link>
           </div>
 
@@ -100,7 +105,7 @@ const Header: React.FC = () => {
             <div className="hidden md:flex md:items-center md:space-x-3">
               <a
                 href="tel:6201060889"
-                className="inline-flex items-center px-3 py-2 text-slate-700 dark:text-slate-100 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition"
+                className="inline-flex items-center px-3 py-2 text-white bg-white/5 dark:bg-transparent rounded-md border border-transparent dark:border-white/5 hover:bg-white/10 dark:hover:bg-slate-800/40 transition"
               >
                 {/* Phone icon */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -111,7 +116,7 @@ const Header: React.FC = () => {
 
               <Link
                 href="/login"
-                className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md shadow-sm hover:bg-primary-500 transition"
+                className="inline-flex items-center px-4 py-2 bg-white/10 dark:bg-slate-900/30 border border-white/20 dark:border-slate-700/30 text-white rounded-md shadow-sm hover:bg-white/20 transition"
               >
                 Sign in
               </Link>
