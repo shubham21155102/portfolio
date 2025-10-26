@@ -47,7 +47,7 @@ const Header: React.FC = () => {
     { href: "/blog", label: "Blog" },
     { href: "/progress", label: "DSA" },
     { href: "/work", label: "Works" },
-    { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact Us" },
     { href: "/resume", label: "Resume" },
   ];
 
@@ -97,7 +97,18 @@ const Header: React.FC = () => {
               )}
             </button>
 
-            <div className="hidden md:block">
+            <div className="hidden md:flex md:items-center md:space-x-3">
+              <a
+                href="tel:6201060889"
+                className="inline-flex items-center px-3 py-2 text-white rounded-md hover:bg-slate-800/60 transition"
+              >
+                {/* Phone icon */}
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2.003 5.884l2-3A1 1 0 015 2h3a1 1 0 011 .883l.6 4A1 1 0 009.6 8.9L8.95 9.1a11.042 11.042 0 005.01 5.01l.2-.65a1 1 0 01.02-.45l4-.6A1 1 0 0118 16v3a1 1 0 01-1 1 16 16 0 01-15-15 1 1 0 011-1h3a1 1 0 01.884.6l-.781 2.284A1 1 0 012.003 5.884z" />
+                </svg>
+                <span className="ml-2">6201060889</span>
+              </a>
+
               <Link
                 href="/login"
                 className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md shadow-sm hover:bg-primary-500 transition"
@@ -149,6 +160,14 @@ const Header: React.FC = () => {
               {l.label}
             </Link>
           ))}
+
+          <a
+            href="tel:6201060889"
+            onClick={() => setOpen(false)}
+            className="block text-white text-lg font-medium px-2 py-2 rounded hover:bg-slate-800/60 transition"
+          >
+            Call: 6201060889
+          </a>
 
           <div className="pt-2">
             <Link
