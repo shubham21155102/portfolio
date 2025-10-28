@@ -10,7 +10,7 @@ export function Card({
   href: string;
 }): JSX.Element {
   const base =
-    "block p-6 rounded-lg bg-white/60 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition";
+    "block p-6 rounded-lg bg-white/10 dark:bg-slate-800/40 backdrop-blur-md border border-white/20 dark:border-slate-700/30 shadow-md hover:shadow-lg transition-transform hover:-translate-y-1";
 
   const safeHref = href ? `${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo` : "#";
 
