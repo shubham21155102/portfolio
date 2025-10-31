@@ -271,3 +271,16 @@ section .color:nth-child(3){
     background-position: 0%;
   }
 }
+/* Progress Card Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
