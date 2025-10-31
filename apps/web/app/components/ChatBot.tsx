@@ -93,49 +93,60 @@ export default function ChatBot() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <div className="border rounded-lg p-4 bg-white dark:bg-gray-900 dark:text-gray-100 shadow">
-        <div className="space-y-3 mb-4 h-64 overflow-y-auto" aria-live="polite" ref={listRef}>
+    <div className="w-full">
+      <div className="border rounded-lg p-4 bg-white dark:bg-gray-900 dark:text-gray-100 shadow-sm">
+        <div className="space-y-3 mb-4 h-96 overflow-y-auto" aria-live="polite" ref={listRef}>
           {messages.map((m) => (
-            <div key={m.id} className={`flex items-start gap-2 ${m.from === "user" ? "justify-end" : "justify-start"}`}>
+            <div key={m.id} className={`flex items-start gap-3 ${m.from === "user" ? "justify-end" : "justify-start"}`}>
               {m.from === "bot" && (
-                <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold">AI</div>
+                <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold shrink-0">AI</div>
               )}
-              <div className={m.from === "user" ? "text-right" : "text-left"}>
+              <div className={`flex flex-col ${m.from === "user" ? "items-end" : "items-start"} max-w-[75%]`}>
                 <div
-                  className={`inline-block px-3 py-2 rounded-lg max-w-[70%] break-words leading-relaxed ${
-                    m.from === "user" ? "bg-blue-500 text-white" : "bg-gray-100 dark:bg-gray-800"
+                  className={`px-4 py-2.5 rounded-2xl break-words leading-relaxed ${
+                    m.from === "user" 
+                      ? "bg-indigo-600 text-white rounded-tr-sm" 
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-tl-sm"
                   }`}
                 >
                   {m.text}
                 </div>
               </div>
               {m.from === "user" && (
-                <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold">YOU</div>
+                <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold shrink-0">YOU</div>
               )}
             </div>
           ))}
         </div>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center pt-2 border-t border-gray-200 dark:border-gray-700">
           <input
             ref={inputRef}
-            className="flex-1 rounded-md border px-3 py-2 bg-gray-50 dark:bg-gray-800"
+            className="flex-1 rounded-xl border border-gray-300 dark:border-gray-600 px-4 py-3 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={onKey}
-            placeholder={loading ? "Thinking..." : "Type a message and press Enter"}
+            placeholder={loading ? "AI is thinking..." : "Type your message..."}
             disabled={loading}
           />
           <button
-            className="px-4 py-2 rounded-md bg-indigo-600 text-white disabled:opacity-50"
+            className="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
             onClick={send}
             disabled={loading}
           >
-            {loading ? "..." : "Send"}
+            {loading ? (
+              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+            )}
           </button>
           <button
-            className="px-3 py-2 rounded-md border text-sm text-gray-600 dark:text-gray-200 ml-2"
+            className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
             onClick={() => setMessages([])}
             title="Clear chat"
           >
