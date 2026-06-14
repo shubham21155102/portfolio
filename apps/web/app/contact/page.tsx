@@ -19,7 +19,7 @@ const Contact = () => {
             <div className={Classes.profileImageWrapper}>
               <div className={Classes.profileGlow}></div>
               <Image
-                src={"/shubham.jpg"}
+                src={"/shubham-rp360.png"}
                 alt="Shubham Patel"
                 width={200}
                 height={200}

@@ -9,7 +9,7 @@ const page = (props: any) => {
     // Check if slug is defined before using it
     if (slug) {
       const items: any = [];
-      jsonData.data.map((e) => {
+      (jsonData.data as any[]).map((e: any) => {
         if (e.id == slug) {
           items.push(e);
         }

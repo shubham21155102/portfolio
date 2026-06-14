@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { Rocket, Zap, TrendingUp, Flame } from "lucide-react";
 
 const ProgressCard = ({
   title,
@@ -33,7 +34,7 @@ const ProgressCard = ({
         glow: "shadow-emerald-500/50",
         textColor: "text-emerald-700 dark:text-emerald-400",
         badge: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300",
-        icon: "🚀",
+        icon: Rocket,
       };
     } else if (percentage >= 60) {
       return {
@@ -44,7 +45,7 @@ const ProgressCard = ({
         glow: "shadow-blue-500/50",
         textColor: "text-blue-700 dark:text-blue-400",
         badge: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300",
-        icon: "⚡",
+        icon: Zap,
       };
     } else if (percentage >= 40) {
       return {
@@ -55,7 +56,7 @@ const ProgressCard = ({
         glow: "shadow-amber-500/50",
         textColor: "text-amber-700 dark:text-amber-400",
         badge: "bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300",
-        icon: "📈",
+        icon: TrendingUp,
       };
     } else {
       return {
@@ -66,12 +67,13 @@ const ProgressCard = ({
         glow: "shadow-rose-500/50",
         textColor: "text-rose-700 dark:text-rose-400",
         badge: "bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300",
-        icon: "💪",
+        icon: Flame,
       };
     }
   };
 
   const colorScheme = getColorScheme();
+  const StatusIcon = colorScheme.icon;
 
   return (
     <Link href={`/progress/${sl_no}`}>
@@ -102,8 +104,8 @@ const ProgressCard = ({
           <div className="flex justify-between items-start mb-4">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl" role="img" aria-label="status">
-                  {colorScheme.icon}
+                <span className={colorScheme.textColor} aria-label="status">
+                  <StatusIcon className="h-6 w-6" strokeWidth={2} />
                 </span>
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${colorScheme.badge}`}>
                   Level {sl_no}
