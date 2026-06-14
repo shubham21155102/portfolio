@@ -60,8 +60,8 @@ const Page = () => {
           Your Progress
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dsaData.data.map((item, index) => {
-            const allTopics = item.sub_steps.flatMap((step) => step.topics);
+          {(dsaData.data as any[]).map((item: any, index: number) => {
+            const allTopics = item.sub_steps.flatMap((step: any) => step.topics);
             const percentage = calculateCompletion(allTopics);
             return (
               <ProgressCard

@@ -20,6 +20,36 @@
   --glass-border-rgb: 226, 232, 240;
 
   --glow: linear-gradient(135deg, rgba(var(--color-primary-rgb),0.12), rgba(var(--color-accent-rgb),0.08));
+
+  /* Shared gradients & shadows (used by the contact page module) */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* Adaptive card surface — legible in BOTH light and dark themes.
+   Used across the portfolio sections instead of hard-coded white/10. */
+.surface-card {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--surface-rgb), 0.85),
+    rgba(var(--surface-rgb), 0.65)
+  );
+  border: 1px solid rgba(var(--glass-border-rgb), 0.6);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+}
+.dark .surface-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* Utility glassmorphism helpers */
@@ -77,12 +107,12 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-    135deg,
+    160deg,
     rgb(var(--background-start-rgb)) 0%,
     rgb(var(--background-end-rgb)) 100%
   );
+  background-repeat: no-repeat;
   min-height: 100vh;
-  background-attachment: fixed;
 }
 
 a {
@@ -94,7 +124,10 @@ a {
 @tailwind components;
 @tailwind utilities;
 
-section{
+/* Legacy auth/landing background — scoped to .fancy-bg so it does NOT
+   hijack the portfolio's semantic <section> elements. Used by /register
+   and /extradsa/form (Lab pages). */
+.fancy-bg{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,26 +136,26 @@ section{
   position: relative;
 }
 
-section .color{
+.fancy-bg .color{
   position: absolute;
   filter: blur(200px);
   opacity: 0.5;
 }
-section .color:nth-child(1){
+.fancy-bg .color:nth-child(1){
   top: -350px;
   width: 600px;
   height: 600px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-section .color:nth-child(2){
+.fancy-bg .color:nth-child(2){
   bottom: -150px;
   left: 100px;
   width: 500px;
   height: 500px;
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
-section .color:nth-child(3){
+.fancy-bg .color:nth-child(3){
   bottom: 50px;
   left: 100px;
   width: 300px;

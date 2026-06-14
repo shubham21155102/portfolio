@@ -1,10 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { Sun, Moon, Menu, X } from "lucide-react";
+import { profile } from "./data/portfolio";
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     try {
@@ -14,16 +17,24 @@ const Header: React.FC = () => {
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-      if (saved === "dark" || (!saved && prefersDark)) {
-        document.documentElement.classList.add("dark");
-        setIsDark(true);
-      } else {
+      // Portfolio looks best in dark; default to dark unless user chose light.
+      if (saved === "light") {
         document.documentElement.classList.remove("dark");
         setIsDark(false);
+      } else if (saved === "dark" || prefersDark || !saved) {
+        document.documentElement.classList.add("dark");
+        setIsDark(true);
       }
     } catch (e) {
       // ignore (server or browsers without localStorage)
     }
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -43,107 +54,85 @@ const Header: React.FC = () => {
   };
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/blog", label: "Blog" },
-    { href: "/progress", label: "DSA" },
-    { href: "/work", label: "Works" },
-  { href: "/contact", label: "Contact Us" },
-    { href: "/resume", label: "Resume" },
+    { href: "/#skills", label: "Skills" },
+    { href: "/#experience", label: "Experience" },
+    { href: "/#projects", label: "Projects" },
+    { href: "/#contact", label: "Contact" },
+    { href: "/lab", label: "Lab" },
   ];
 
   return (
-  <header className="fixed top-0 left-0 right-0 z-40 glass bg-white/60 dark:bg-slate-900/72 border-b border-slate-200/20 dark:border-slate-700/30">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-white/10 bg-white/70 backdrop-blur-xl dark:bg-slate-950/70"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
           {/* Brand */}
-          <div className="flex items-center">
-            <Link href="/">
-              <span
-                className="text-xl font-semibold tracking-tight bg-clip-text text-transparent"
-                style={{ backgroundImage: "linear-gradient(90deg, rgba(6,182,212,1), rgba(124,58,237,1))" }}
-              >
-                Shubham
-              </span>
-            </Link>
-          </div>
+          <Link href="/" className="text-xl font-semibold tracking-tight">
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, rgba(45,212,191,1), rgba(124,58,237,1))",
+              }}
+            >
+              {profile.name.split(" ")[0]}
+            </span>
+            <span className="text-primary-400">.</span>
+          </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex md:items-center md:space-x-8">
+          <nav className="hidden items-center gap-8 md:flex">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-slate-700 dark:text-slate-100 hover:text-primary-500 transition-colors relative group"
+                className="group relative text-sm font-medium text-slate-700 transition-colors hover:text-primary-500 dark:text-slate-200"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary-500 transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
 
-          {/* Right side CTA / mobile button */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             {/* Theme toggle */}
             <button
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               onClick={toggleTheme}
-              className="ml-3 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-slate-800/60 transition"
+              className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 transition hover:bg-slate-200/40 dark:text-slate-200 dark:hover:bg-slate-800/60"
             >
               {isDark ? (
-                // Sun icon
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M10 3.5a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 3.5zM10 13a3 3 0 100-6 3 3 0 000 6zM4.22 5.47a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06L4.22 6.53a.75.75 0 010-1.06zM14.66 13.94a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zM3.5 10a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H4.25A.75.75 0 013.5 10zM13 10a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0113 10zM4.22 14.53a.75.75 0 010-1.06l1.06-1.06a.75.75 0 111.06 1.06l-1.06 1.06a.75.75 0 01-1.06 0zM14.66 6.06a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0z" />
-                </svg>
+                <Sun className="h-5 w-5" />
               ) : (
-                // Moon icon
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.293 13.293A8 8 0 116.707 2.707a7 7 0 0010.586 10.586z" />
-                </svg>
+                <Moon className="h-5 w-5" />
               )}
             </button>
 
-            <div className="hidden md:flex md:items-center md:space-x-3">
-              <a
-                href="tel:6201060889"
-                className="inline-flex items-center px-3 py-2 text-white bg-white/5 dark:bg-transparent rounded-md border border-transparent dark:border-white/5 hover:bg-white/10 dark:hover:bg-slate-800/40 transition"
-              >
-                {/* Phone icon */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2.003 5.884l2-3A1 1 0 015 2h3a1 1 0 011 .883l.6 4A1 1 0 009.6 8.9L8.95 9.1a11.042 11.042 0 005.01 5.01l.2-.65a1 1 0 01.02-.45l4-.6A1 1 0 0118 16v3a1 1 0 01-1 1 16 16 0 01-15-15 1 1 0 011-1h3a1 1 0 01.884.6l-.781 2.284A1 1 0 012.003 5.884z" />
-                </svg>
-                <span className="ml-2">6201060889</span>
-              </a>
-
-              <Link
-                href="/login"
-                className="inline-flex items-center px-4 py-2 bg-white/10 dark:bg-slate-900/30 border border-white/20 dark:border-slate-700/30 text-white rounded-md shadow-sm hover:bg-white/20 transition"
-              >
-                Sign in
-              </Link>
-            </div>
+            <Link
+              href={profile.resumeUrl}
+              target="_blank"
+              className="hidden rounded-lg bg-gradient-to-r from-primary-500 to-accent-purple px-4 py-2 text-sm font-semibold text-white shadow-md transition-transform hover:scale-105 md:inline-flex"
+            >
+              Resume
+            </Link>
 
             {/* Mobile menu button */}
             <button
               aria-label="Toggle menu"
               aria-expanded={open}
               onClick={() => setOpen((s) => !s)}
-              className="ml-3 inline-flex items-center justify-center p-2 rounded-md text-white md:hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-300"
+              className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-300 dark:text-slate-200 md:hidden"
             >
-              {/* Hamburger / close icon */}
-              <svg
-                className={`h-6 w-6 transition-transform ${open ? "transform rotate-90" : ""}`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                {open ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {open ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -151,38 +140,27 @@ const Header: React.FC = () => {
 
       {/* Mobile menu panel */}
       <div
-        className={`md:hidden ${open ? "block" : "hidden"} bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-t border-slate-200/20 dark:border-slate-700/10`}
-        id="mobile-menu"
+        className={`md:hidden ${open ? "block" : "hidden"} border-t border-white/10 bg-white/95 backdrop-blur-sm dark:bg-slate-950/95`}
       >
-        <div className="px-4 pt-4 pb-6 space-y-4">
+        <div className="space-y-1 px-4 pb-6 pt-4">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block text-slate-700 dark:text-slate-100 text-lg font-medium px-2 py-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800/60 transition"
+              className="block rounded px-2 py-2.5 text-lg font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-800/60"
             >
               {l.label}
             </Link>
           ))}
-
-          <a
-            href="tel:6201060889"
+          <Link
+            href={profile.resumeUrl}
+            target="_blank"
             onClick={() => setOpen(false)}
-            className="block text-white text-lg font-medium px-2 py-2 rounded hover:bg-slate-800/60 transition"
+            className="mt-2 block rounded-lg bg-gradient-to-r from-primary-500 to-accent-purple px-4 py-2.5 text-center font-semibold text-white"
           >
-            Call: 6201060889
-          </a>
-
-          <div className="pt-2">
-            <Link
-              href="/login"
-              onClick={() => setOpen(false)}
-              className="block text-center w-full px-4 py-2 bg-primary-600 text-white rounded-md shadow-sm hover:bg-primary-500 transition"
-            >
-              Sign in
-            </Link>
-          </div>
+            Resume
+          </Link>
         </div>
       </div>
     </header>

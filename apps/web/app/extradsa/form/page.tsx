@@ -80,7 +80,7 @@ const Page = () => {
   return (
     <>
       <div>
-        <section>
+        <section className="fancy-bg">
           <div className="color"></div>
           <div className="color"></div>
           <div className="color"></div>
