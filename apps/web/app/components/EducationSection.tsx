@@ -31,11 +31,11 @@ export default function EducationSection() {
                 </p>
               </div>
             </div>
-            <div className="mt-4 flex items-center justify-between text-sm">
+            <div className="mt-auto flex items-start justify-between gap-3 pt-4 text-sm">
               <span className="font-semibold text-slate-700 dark:text-slate-200">
                 {edu.grade}
               </span>
-              <span className="text-slate-500 dark:text-slate-400">
+              <span className="shrink-0 whitespace-nowrap text-slate-500 dark:text-slate-400">
                 {edu.startDate} – {edu.endDate}
               </span>
             </div>

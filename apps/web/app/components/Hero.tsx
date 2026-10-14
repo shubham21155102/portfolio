@@ -3,12 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { ArrowDown } from "lucide-react";
 import { profile } from "../data/portfolio";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-4 pt-20">
+    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-10 pt-24">
       {/* Animated gradient blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-40 -left-20 h-[28rem] w-[28rem] rounded-full bg-primary-500/30 blur-[120px] animate-pulse-slow" />
@@ -16,7 +15,7 @@ export default function Hero() {
         <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-accent-pink/20 blur-[120px] animate-pulse-slow" />
       </div>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[1.3fr_1fr]">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[1.3fr_1fr]">
         {/* Left: copy */}
         <div className="text-center md:text-left">
           <motion.div
@@ -113,12 +112,14 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Stat strip */}
+      {/* Stat strip: in normal flow below the hero so it lines up with the
+          content and never runs off-screen (framer-motion owns `transform`,
+          so it can't be centred with translate classes). */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.5 }}
-        className="absolute bottom-8 left-1/2 hidden w-full max-w-4xl -translate-x-1/2 grid-cols-4 gap-4 px-4 sm:grid"
+        className="mx-auto mt-14 grid w-full max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4"
       >
         {profile.stats.map((s) => (
           <div
@@ -133,13 +134,6 @@ export default function Hero() {
         ))}
       </motion.div>
 
-      <a
-        href="#skills"
-        aria-label="Scroll down"
-        className="absolute bottom-2 left-1/2 -translate-x-1/2 text-slate-400 sm:hidden"
-      >
-        <ArrowDown className="h-5 w-5 animate-bounce" />
-      </a>
     </section>
   );
 }

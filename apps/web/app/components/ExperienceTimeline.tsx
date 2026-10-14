@@ -30,7 +30,7 @@ export default function ExperienceTimeline() {
               }`}
             >
               {/* node */}
-              <span className="absolute left-4 top-2 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-primary-400 ring-4 ring-primary-400/20 sm:left-1/2" />
+              <span className="absolute left-4 top-2 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-primary-400 ring-4 ring-primary-400/20 sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2" />
 
               {/* card */}
               <div className="ml-10 w-full sm:ml-0 sm:w-[calc(50%-2rem)]">
