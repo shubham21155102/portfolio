@@ -5,7 +5,6 @@ import ExperienceTimeline from "./components/ExperienceTimeline";
 import Projects from "./components/Projects";
 import EducationSection from "./components/EducationSection";
 import ContactCTA from "./components/ContactCTA";
-import FloatingChat from "./components/FloatingChat";
 
 export default function Page(): JSX.Element {
   return (
@@ -19,7 +18,6 @@ export default function Page(): JSX.Element {
         <EducationSection />
         <ContactCTA />
       </main>
-      <FloatingChat />
     </>
   );
 }
